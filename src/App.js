@@ -9,8 +9,8 @@ import {
 import Header from './containers/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import products from './pages/products';
-import categories from './pages/categories';
+import products from './pages/Products';
+import categories from './pages/Categories';
 
 class App extends Component {
 
