@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import products from './pages/Products';
 import categories from './pages/Categories';
-import Login from './pages/Login';
+import Login from './containers/Login'
 
 class App extends Component {
 
