@@ -1,10 +1,30 @@
 const config = {
     baseApiUrl: "https://reactprojectdbserver.azurewebsites.net",
-    apiSettings: {
+    apiRoutes: {
         productRoute: "/products",
         categoryRoute: "/categories",
         orderRoute: "/orders",
         usersRoute: "/users"
+    },
+    topProductsCount: 4,
+    carouselImages: [
+        {
+            name: "Carousel Image 1",
+            url: "https://via.placeholder.com/2000x400.png?text=Carousel Image 1"
+        },
+        {
+            name: "Carousel Image 2",
+            url: "https://via.placeholder.com/2000x400.png?text=Carousel Image 2"
+        },
+        {
+            name: "Carousel Image 3",
+            url: "https://via.placeholder.com/2000x400.png?text=Carousel Image 3"
+        }
+    ],
+    listingType: {
+        allProductsListing: 'allProductsListing',
+        topProductsListing: 'topProductsListing',
+        filterProductsListing: 'filterProductsListing'
     }
 }
 export default config
