@@ -1,37 +1,47 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, 
-    Route, 
+import {
+    BrowserRouter as Router,
+    Route,
     Redirect,
-    Switch} from 'react-router-dom';
+    Switch
+} from 'react-router-dom';
 
 import Header from './containers/Header';
-import Login from './containers/Login';
-import Home from './components/Home';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import products from './pages/products';
+import categories from './pages/categories';
 
 class App extends Component {
-   
+
     constructor(props) {
         super(props);
     }
 
     render() {
         return (
-            <Router>
-                <div>
-                    <Header />
+            <div className="container">
+                <Router>
+                    <div>
+                        <Header />
 
-                    <Switch>
-                    <Route path="/" exact render={ (props)=>(<Home  />)} />
+                        <Switch>
+                            <Route path="/" exact render={(props) => (<Home />)} />
 
-                    <Route path="/login" 
-                          component={Login} />
+                            <Route path="/products"
+                                component={products} />
 
-                    <Route path="*" render={(props) => (<Home/>)}/>
+                            <Route path="/Categories"
+                                component={categories} />
 
-                    </Switch>
-                </div>
-            </Router>
+                            <Route path="*" render={(props) => (<Home />)} />
 
+                        </Switch>
+                        <hr />
+                        <Footer />
+                    </div>
+                </Router>
+            </div>
         );
     }
 }
