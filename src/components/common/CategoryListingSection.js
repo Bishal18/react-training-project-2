@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
 import Card from './Card';
+import axios from 'axios';
+import config from '../../configs/config';
+
 
 class CategoryListingSection extends Component {
+    state = { categoryList: [] }
+
     componentDidMount() {
-        this.props.fetchCategories();
+        let apiUrl = `${config.baseApiUrl}${config.apiRoutes.categoryRoute}`;
+        axios.get(apiUrl)
+            .then(response => {
+                var categoryList = response.data;
+                this.setState({ categoryList });
+            })
+            .catch(function (error) {
+                console.log("Error in fetchProducts action: " + error);
+            });
     }
 
     render() {
-        let { categories } = this.props;
+        let { categoryList } = this.state;
+        console.log(categoryList);
         return (
             <div className="row">
                 {
-                    (categories)
+                    (categoryList)
                     &&
-                    categories.map((category, index) => (
+                    categoryList.map((category, index) => (
                         <Card key={index}
                             cardDetail={category}
                             type="CategoryCard" />

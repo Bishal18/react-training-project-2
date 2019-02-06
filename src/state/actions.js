@@ -8,11 +8,6 @@ export const getProducts = (products) => ({
     payload: { products }
 })
 
-export const getCategories = (categories) => ({
-    type: ActionTypes.CATEGORIES,
-    payload: { categories }
-})
-
 // export const login = (username, password) =>{
 //     console.log("username", username);
 //     console.log("password", password);
@@ -53,18 +48,6 @@ export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
         .then(response => {
             console.log(response.data);
             dispatch(getProducts(response.data));
-        })
-        .catch(function (error) {
-            console.log("Error in fetchProducts action: " + error);
-        });
-}
-
-export const fetchCategories = (type, filterParams) => (dispatch, getState) => {
-    var apiUrl = `${config.baseApiUrl}${config.apiRoutes.categoryRoute}`;
-    axios.get(apiUrl)
-        .then(response => {
-            console.log(response.data);
-            dispatch(getCategories(response.data));
         })
         .catch(function (error) {
             console.log("Error in fetchProducts action: " + error);

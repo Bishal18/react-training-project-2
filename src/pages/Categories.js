@@ -1,10 +1,10 @@
 import React from 'react';
-import CategoriesContainer from '../containers/CategoriesContainer';
+import CategoryListingSection from '../components/common/CategoryListingSection';
 
 const categories = () => {
     return (
         <div>
-            <CategoriesContainer />
+            <CategoryListingSection />
         </div>
 
     )
