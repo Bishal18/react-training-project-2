@@ -4,7 +4,7 @@ import config from '../../configs/config';
 
 class Card extends Component {
     render() {
-        let { cardDetail: { name, shortDescription, imageUrl, ratings }, type } = this.props;
+        let { cardDetail: { id, name, shortDescription, imageUrl, ratings }, type } = this.props;
         return (
             <div className="col-md-3">
                 <div className="card">
@@ -32,7 +32,7 @@ class Card extends Component {
                                     </div>
                                 </div>
                                 : <div className="cardDetails offset-md-9">
-                                    <a href="#" className="btn btn-primary">More</a>
+                                    <a href={`/products/${id}`} className="btn btn-primary">More</a>
                                 </div>
                         }
                     </div>
