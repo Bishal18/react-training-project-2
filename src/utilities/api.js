@@ -12,6 +12,9 @@ export const getProductApiUrl = (type, filterParams = []) => {
             ));
             apiUrl += `?${queryParams}`;
             break;
+        case config.listingType.searchProductsListing:
+            apiUrl += filterParams && `?q=${filterParams[0].query}`;
+            break;
         default:
             break;
     }

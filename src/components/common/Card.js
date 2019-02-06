@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import StarRatings from 'react-star-ratings';
+import config from '../../configs/config';
 
 class Card extends Component {
     render() {
@@ -12,7 +14,13 @@ class Card extends Component {
                         {
                             type && type === 'ProductCard'
                                 ? <div className="cardDetails">
-                                    <p>Rating: {ratings.avgRating} ({ratings.totalReviews} rated)</p>
+                                    <StarRatings rating={ratings.avgRating}
+                                        starRatedColor="yellow"
+                                        numberOfStars={config.totalStars}
+                                        name='rating'
+                                        starDimension="20px"
+                                        starSpacing="3px" />
+                                    <p>({ratings.totalReviews} rated)</p>
                                     <p className="card-text">{shortDescription}</p>
                                     <div className="row">
                                         <div className="col-md-6">
