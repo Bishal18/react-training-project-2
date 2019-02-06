@@ -2,12 +2,11 @@ import * as ActionTypes from '../action-types';
 import config from '../../configs/config';
 
 const INITIAL_STATE = {
-    authenticated: true,
-    username: 'manoj'
+    authenticated: false,
+    username: ''
 }
 
 export const authReducer = (state = INITIAL_STATE, action) => {
-    
     switch (action.type) {
         case ActionTypes.LOGOUT:
             return { ...state, authenticated: false, username: '' }

@@ -14,13 +14,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, getState) => {
     return {
-        login: function (username, password) {
+        login: function (username, password, callback) {
+            let success = false;
             if (username === "admin" & password === "b") {
-                return (dispatch) => {
-                    const action = actions.login(true, username);
-                    dispatch(action);
-                }
+                const action = actions.login(true, username);
+                console.log("action", action);
+                dispatch(action);
+                success = true;
             }
+            callback(success);
         }
     }
 }
