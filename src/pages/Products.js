@@ -2,7 +2,7 @@ import React from 'react';
 import config from '../configs/config';
 import ProductsContainer from '../containers/ProductsContainer';
 
-const Products = () => {
+const products = () => {
     return (
         <div>
             <ProductsContainer type={config.listingType.allProductsListing} />
@@ -11,4 +11,4 @@ const Products = () => {
     )
 }
 
-export default Products;
+export default products;

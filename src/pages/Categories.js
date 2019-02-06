@@ -2,7 +2,7 @@ import React from 'react';
 import config from '../configs/config';
 import CategoriesContainer from '../containers/CategoriesContainer';
 
-const Categories = () => {
+const categories = () => {
     return (
         <div>
             <CategoriesContainer />
@@ -11,4 +11,4 @@ const Categories = () => {
     )
 }
 
-export default Categories;
+export default categories;

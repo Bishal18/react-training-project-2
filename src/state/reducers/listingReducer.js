@@ -8,9 +8,9 @@ const INITIAL_STATE = {
 
 export const listingReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case ActionTypes.Products:
+        case ActionTypes.PRODUCTS:
             return { ...state, products: action.payload.products };
-        case ActionTypes.Categories:
+        case ActionTypes.CATEGORIES:
             return { ...state, categories: action.payload.categories };
         default:
             return state;

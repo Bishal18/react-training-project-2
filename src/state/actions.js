@@ -4,15 +4,38 @@ import * as utils from '../utilities/api';
 import config from '../configs/config';
 
 export const getProducts = (products) => ({
-    type: ActionTypes.Products,
+    type: ActionTypes.PRODUCTS,
     payload: { products }
 })
 
 export const getCategories = (categories) => ({
-    type: ActionTypes.Categories,
+    type: ActionTypes.CATEGORIES,
     payload: { categories }
 })
 
+export const login = (username, password) =>{
+    console.log("username", username);
+    console.log("password", password);
+    
+    if(username === "admin" & password === "b")
+    {
+        return (dispatch) =>{
+            const action = {
+                type: ActionTypes.LOGIN,
+                payload: {username}
+            } 
+            dispatch(action);
+        }
+    }
+}
+export const logout = () => {
+    return (dispatch) => {
+        const action = {
+            type: ActionTypes.LOGOUT
+        } 
+        dispatch(action);
+    }
+}
 
 export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
     var apiUrl = utils.getProductApiUrl(type, filterParams);
@@ -37,4 +60,3 @@ export const fetchCategories = (type, filterParams) => (dispatch, getState) => {
             console.log("Error in fetchProducts action: " + error);
         });
 }
-
