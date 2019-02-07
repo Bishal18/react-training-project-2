@@ -11,8 +11,10 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import products from './pages/Products';
 import categories from './pages/Categories';
-import Checkout from './pages/Checkout';
+import Checkout from './containers/CheckoutTable';
 import Login from './containers/Login'
+import productDetail from './pages/ProductDetail';
+import Cart from './containers/Cart';
 
 class App extends Component {
 
@@ -28,10 +30,17 @@ class App extends Component {
                         <Header />
                         <hr />
                         <Switch>
-                            <Route path="/" exact render={(props) => (<Home />)} />
+                            <Route path="/"
+                                exact
+                                render={(props) => (<Home {...props}/>)} />
 
                             <Route path="/products"
+                                exact
                                 component={products} />
+
+                            <Route path="/products/:productId"
+                                exact
+                                component={productDetail} />
 
                             <Route path="/Categories"
                                 component={categories} />
@@ -42,7 +51,11 @@ class App extends Component {
                              <Route path="/Checkout"
                                 component={Checkout} />
 
-                            <Route path="*" render={(props) => (<Home />)} />
+                            <Route path="/cart"
+                                component={Cart} />
+
+                            <Route path="*"
+                                render={(props) => (<Home />)} />
 
                         </Switch>
                         <hr />

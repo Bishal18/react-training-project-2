@@ -1,15 +1,20 @@
 import React from 'react';
 import config from '../configs/config';
-import ProductsContainer from '../containers/ProductsContainer';
+import ProductSection from '../containers/ProductSection';
 import Filter from '../components/Filter';
 
 const products = () => {
+    var filterType = {
+        searchFilter: config.listingType.searchProductsListing,
+        categoryFilter: config.listingType.filterProductsListing
+    }
+
     return (
         <div>
             <br />
-            <Filter />
+            <Filter filterType={filterType} />
             <br />
-            <ProductsContainer type={config.listingType.allProductsListing} />
+            <ProductSection type={config.listingType.allProductsListing} />
         </div>
 
     )

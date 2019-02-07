@@ -15,8 +15,8 @@ class ProductListingSection extends Component {
                     &&
                     products.map((product, index) => (
                         <Card key={index}
-                            cardDetail={product}
-                            type="ProductCard" />
+                            cardDetail={product} 
+                            type="ProductCard" buyNow={this.props.buyNow} />
                     ))
                 }
             </div>

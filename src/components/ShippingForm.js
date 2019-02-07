@@ -5,11 +5,11 @@ import config from '../configs/config';
 const ShippingForm = (props) => {
 
     const details = config.formDetails;
-    console.log(">>>" + details)
-    const data = details.map(item =>{
+    //console.log(">>>" + details)
+    const data = details.map((item,index)=>{
         return(
-            <div className="form-group">
-                <label for={item.fieldname}>{item.fieldname}:</label>
+            <div className="form-group" key={index}>
+                <label >{item.fieldname}:</label>
                 <input type="text" className="form-control" />
             </div>
         )
