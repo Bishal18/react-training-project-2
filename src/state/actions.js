@@ -8,11 +8,27 @@ export const getProducts = (products) => ({
     payload: { products }
 })
 
-export const getCategories = (categories) => ({
-    type: ActionTypes.CATEGORIES,
-    payload: { categories }
+export const updateCart = (type, product) => ({
+    type: ActionTypes.UPDATE_ITEMS,
+    payload: { type, product }
 })
 
+export const removeFromCart = (productId) => ({
+    type: ActionTypes.REMOVE_FROM_CART,
+    payload: { productId }
+})
+
+export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
+    var apiUrl = utils.getProductApiUrl(type, filterParams);
+    axios.get(apiUrl)
+        .then(response => {
+            console.log(response.data);
+            dispatch(getProducts(response.data));
+        })
+        .catch(function (error) {
+            console.log("Error in fetchProducts action: " + error);
+        });
+}
 
 export const login = (user) => ({
     type: ActionTypes.LOGIN,
@@ -43,26 +59,3 @@ export const autheticateUser = (username, password, callback) => (dispatch, getS
 }
 
 
-export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
-    var apiUrl = utils.getProductApiUrl(type, filterParams);
-    axios.get(apiUrl)
-        .then(response => {
-            console.log(response.data);
-            dispatch(getProducts(response.data));
-        })
-        .catch(function (error) {
-            console.log("Error in fetchProducts action: " + error);
-        });
-}
-
-export const fetchCategories = (type, filterParams) => (dispatch, getState) => {
-    var apiUrl = `${config.baseApiUrl}${config.apiRoutes.categoryRoute}`;
-    axios.get(apiUrl)
-        .then(response => {
-            console.log(response.data);
-            dispatch(getCategories(response.data));
-        })
-        .catch(function (error) {
-            console.log("Error in fetchProducts action: " + error);
-        });
-}

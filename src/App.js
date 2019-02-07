@@ -12,6 +12,8 @@ import Home from './pages/Home';
 import products from './pages/Products';
 import categories from './pages/Categories';
 import Login from './pages/Login'
+import productDetail from './pages/ProductDetail';
+import Cart from './containers/Cart';
 
 class App extends Component {
 
@@ -25,20 +27,31 @@ class App extends Component {
                 <Router>
                     <div>
                         <Header />
-
+                        <hr />
                         <Switch>
-                            <Route path="/" exact render={(props) => (<Home />)} />
+                            <Route path="/"
+                                exact
+                                render={(props) => (<Home />)} />
 
                             <Route path="/products"
+                                exact
                                 component={products} />
+
+                            <Route path="/products/:productId"
+                                exact
+                                component={productDetail} />
 
                             <Route path="/Categories"
                                 component={categories} />
-                            
+
                             <Route path="/login"
                                 component={Login} />
 
-                            <Route path="*" render={(props) => (<Home />)} />
+                            <Route path="/cart"
+                                component={Cart} />
+
+                            <Route path="*"
+                                render={(props) => (<Home />)} />
 
                         </Switch>
                         <hr />

@@ -7,6 +7,7 @@ const config = {
         usersRoute: "/users"
     },
     topProductsCount: 4,
+    totalStars: 5,
     carouselImages: [
         {
             name: "Carousel Image 1",
@@ -24,7 +25,8 @@ const config = {
     listingType: {
         allProductsListing: 'allProductsListing',
         topProductsListing: 'topProductsListing',
-        filterProductsListing: 'filterProductsListing'
+        filterProductsListing: 'filterProductsListing',
+        searchProductsListing: 'searchProductsListing'
     }
 }
 export default config

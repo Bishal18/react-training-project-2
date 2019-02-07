@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 import Card from './Card';
+import * as utility from '../../utilities/api';
+
 
 class CategoryListingSection extends Component {
+    state = { categoryList: [] }
+
     componentDidMount() {
-        this.props.fetchCategories();
+        utility.fetchCategories()
+            .then(res => {
+                var categoryList = res;
+                this.setState({ categoryList });
+            });
+
     }
 
     render() {
-        let { categories } = this.props;
+        let { categoryList } = this.state;
         return (
             <div className="row">
                 {
-                    (categories)
+                    (categoryList)
                     &&
-                    categories.map((category, index) => (
+                    categoryList.map((category, index) => (
                         <Card key={index}
                             cardDetail={category}
                             type="CategoryCard" />

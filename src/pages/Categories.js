@@ -1,11 +1,10 @@
 import React from 'react';
-import config from '../configs/config';
-import CategoriesContainer from '../containers/CategoriesContainer';
+import CategoryListingSection from '../components/common/CategoryListingSection';
 
 const categories = () => {
     return (
         <div>
-            <CategoriesContainer />
+            <CategoryListingSection />
         </div>
 
     )
