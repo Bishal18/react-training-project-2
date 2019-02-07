@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import config from '../configs/config';
 
 class SearchProduct extends Component {
     constructor(props) {
@@ -17,6 +16,7 @@ class SearchProduct extends Component {
 
 
     render() {
+        let { type } = this.props;
         return (
             <div className="row search">
                 <div className="col-md-6">
@@ -27,7 +27,7 @@ class SearchProduct extends Component {
                     />
                 </div>
                 <div className="col-md-4">
-                    <button onClick={() => this.props.fetchProducts(config.listingType.searchProductsListing, [{ "query": this.state.searchSelection }])}>
+                    <button onClick={() => this.props.fetchProducts(type, [{ "query": this.state.searchSelection }])}>
                         Search
                     </button>
                 </div>

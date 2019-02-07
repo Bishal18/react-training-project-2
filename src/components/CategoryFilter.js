@@ -1,20 +1,55 @@
 import React, { Component } from 'react';
 import config from '../configs/config';
+import * as utility from '../utilities/api';
 
 class CategoryFilter extends Component {
+
+    state = { categoryList: [] }
+
+    componentDidMount() {
+        utility.fetchCategories()
+            .then(res => {
+                var categoryList = res;
+                this.setState({ categoryList });
+            });
+
+    }
+
+    onCategoryChange = (event) => {
+        var selectedValue = event.target.value;
+        let { type } = this.props;
+        if (selectedValue && selectedValue !== "selected" && selectedValue !== "all") {
+            this.props.fetchProducts(
+                type,
+                [
+                    {
+                        name: "categoryId",
+                        value: event.target.value
+                    }
+                ]);
+        }
+
+        if (selectedValue === "all") {
+            this.props.fetchProducts();
+        }
+    }
+
     render() {
+        let { categoryList } = this.state;
         return (
             <div className="row">
                 <div className="col-md-4">
                     <p>Category:</p>
                 </div>
                 <div className="col-md-7">
-                    <select onChange={(e) => this.props.fetchProducts(config.listingType.filterProductsListing, [{ name: "categoryId", value: e.target.value }])}>
-                        <option value="">Selected</option>
-                        <option value="1">Smartphone</option>
-                        <option value="2">TV</option>
-                        <option value="3">Earphones</option>
-                        <option value="4">Cloths</option>
+                    <select onChange={this.onCategoryChange}>
+                        <option value="selected">Selected</option>
+                        <option value="all">All</option>
+                        {
+                            categoryList.map(category => (
+                                <option key={category.id} value={category.id}>{category.name}</option>
+                            ))
+                        }
                     </select>
                 </div>
             </div>
