@@ -1,4 +1,5 @@
 import config from '../configs/config';
+import axios from 'axios';
 
 export const getProductApiUrl = (type, filterParams = []) => {
     var apiUrl = `${config.baseApiUrl}${config.apiRoutes.productRoute}`;
@@ -20,4 +21,17 @@ export const getProductApiUrl = (type, filterParams = []) => {
     }
     console.log(apiUrl);
     return apiUrl;
+}
+
+export const fetchCategories = async () => {
+    let apiUrl = `${config.baseApiUrl}${config.apiRoutes.categoryRoute}`;
+    try {
+        let res = await axios.get(apiUrl);
+        let { data } = await res;
+        return data;
+    }
+    catch (error) {
+        console.log('Error in fetchCategories utility', error);
+    }
+
 }

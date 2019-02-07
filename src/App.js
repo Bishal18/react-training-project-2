@@ -13,6 +13,7 @@ import products from './pages/Products';
 import categories from './pages/Categories';
 import Login from './containers/Login'
 import productDetail from './pages/ProductDetail';
+import Cart from './containers/Cart';
 
 class App extends Component {
 
@@ -37,6 +38,7 @@ class App extends Component {
                                 component={products} />
 
                             <Route path="/products/:productId"
+                                exact
                                 component={productDetail} />
 
                             <Route path="/Categories"
@@ -44,6 +46,9 @@ class App extends Component {
 
                             <Route path="/login"
                                 component={Login} />
+
+                            <Route path="/cart"
+                                component={Cart} />
 
                             <Route path="*"
                                 render={(props) => (<Home />)} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from '../components/Carousel';
 import config from '../configs/config';
-import ProductsContainer from '../containers/ProductsContainer';
+import ProductSection from '../containers/ProductSection';
 
 const carouselSettings = {
     autoplay: true
@@ -20,7 +20,7 @@ const Home = () => {
             </Carousel>
             <br />
             <hr />
-            <ProductsContainer type={config.listingType.topProductsListing} />
+            <ProductSection type={config.listingType.topProductsListing} />
         </div>
 
     )

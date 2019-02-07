@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import StarRatings from 'react-star-ratings';
 import config from '../../configs/config';
+import AddToCart from '../../containers/AddToCart';
 
 class Card extends Component {
     render() {
-        let { cardDetail: { id, name, shortDescription, imageUrl, ratings }, type } = this.props;
+        let { cardDetail, cardDetail: { id, name, shortDescription, imageUrl, ratings }, type } = this.props;
         return (
             <div className="col-md-3">
                 <div className="card">
@@ -27,7 +28,8 @@ class Card extends Component {
                                             <a href="#" className="btn btn-primary">Buy Now</a>
                                         </div>
                                         <div className="col-md-6">
-                                            <a href="#" className="btn btn-primary">+Cart</a>
+                                            {/* <a href="#" className="btn btn-primary">+Cart</a> */}
+                                            <AddToCart product={cardDetail} />
                                         </div>
                                     </div>
                                 </div>
