@@ -6,7 +6,6 @@ class Login extends React.Component {
         super(props);
         console.log("login constructor", this.props);
         this.state = {
-            authenticated: this.props.authenticated,
             username: '',
             password: '',
             errorMsg: ''
@@ -14,8 +13,8 @@ class Login extends React.Component {
     }
 
     componentWillMount() {
-        console.log("login componentWillMount", this.props.authenticated);
-        if (this.props.authenticated) {
+        console.log("login componentWillMount", this.props.user);
+        if (this.props.user) {
             this.props.history.replace('/');
         }
     }
@@ -30,7 +29,7 @@ class Login extends React.Component {
         );
     }
 
-    isLoginSuccess = (success) => {
+    isLoginSuccess = (success, dispatch) => {
         console.log("login callback", success);
         if (success) {
             this.props.history.replace('/');

@@ -23,15 +23,6 @@ export const buyNow = (product) =>({
     payload:{product}
 })
 
-export const login = (authenticated, username) => ({
-    type: ActionTypes.LOGIN,
-    payload: { authenticated, username }
-})
-
-export const logout = () => ({
-    type: ActionTypes.LOGOUT
-})
-
 export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
     var apiUrl = utils.getProductApiUrl(type, filterParams);
     axios.get(apiUrl)
@@ -44,28 +35,32 @@ export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
         });
 }
 
-// export const login = (username, password) =>{
-//     console.log("username", username);
-//     console.log("password", password);
+export const login = (user) => ({
+    type: ActionTypes.LOGIN,
+    payload: { user }
+})
 
-//     if(username === "admin" & password === "b")
-//     {
-//         return (dispatch) =>{
-//             const action = {
-//                 type: ActionTypes.LOGIN,
-//                 payload: {username}
-//             } 
-//             dispatch(action);
-//         }
-//     }
-// }
+export const logout = () => ({
+    type: ActionTypes.LOGOUT
+})
+
+export const validateToken = () =>({
+    type: ActionTypes.VALIDATE_TOKEN
+})
+
+export const autheticateUser = (username, password, callback) => (dispatch, getState) => {
+    const api = `${config.baseApiUrl}${config.apiRoutes.usersRoute}?username=${username}&password=${password}`
+    fetch(api)
+        .then(response => response.json())
+        .then(users => {
+            if (users && users.length > 0) {
+                dispatch(login(users[0]));
+                callback(true);
+            }
+            else {
+                callback(false);
+            }
+        });
+}
 
 
-// export const logout = () => {
-//     return (dispatch) => {
-//         const action = {
-//             type: ActionTypes.LOGOUT
-//         } 
-//         dispatch(action);
-//     }
-// }
