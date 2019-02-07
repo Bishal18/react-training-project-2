@@ -13,39 +13,35 @@ export const getCategories = (categories) => ({
     payload: { categories }
 })
 
-// export const login = (username, password) =>{
-//     console.log("username", username);
-//     console.log("password", password);
 
-//     if(username === "admin" & password === "b")
-//     {
-//         return (dispatch) =>{
-//             const action = {
-//                 type: ActionTypes.LOGIN,
-//                 payload: {username}
-//             } 
-//             dispatch(action);
-//         }
-//     }
-// }
-
-export const login = (authenticated, username) =>({
+export const login = (user) => ({
     type: ActionTypes.LOGIN,
-    payload: {authenticated, username}
+    payload: { user }
 })
-
-// export const logout = () => {
-//     return (dispatch) => {
-//         const action = {
-//             type: ActionTypes.LOGOUT
-//         } 
-//         dispatch(action);
-//     }
-// }
 
 export const logout = () => ({
     type: ActionTypes.LOGOUT
 })
+
+export const validateToken = () =>({
+    type: ActionTypes.VALIDATE_TOKEN
+})
+
+export const autheticateUser = (username, password, callback) => (dispatch, getState) => {
+    const api = `${config.baseApiUrl}${config.apiRoutes.usersRoute}?username=${username}&password=${password}`
+    fetch(api)
+        .then(response => response.json())
+        .then(users => {
+            if (users && users.length > 0) {
+                dispatch(login(users[0]));
+                callback(true);
+            }
+            else {
+                callback(false);
+            }
+        });
+}
+
 
 export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
     var apiUrl = utils.getProductApiUrl(type, filterParams);

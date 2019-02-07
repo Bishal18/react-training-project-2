@@ -6,14 +6,13 @@ import { bindActionCreators } from 'redux';
 import Header from '../components/Header';
 
 const mapStateToProps = (state) => {
+    console.log('mapStateToProps header', state);
     return {
-        authenticated: state.auth.authenticated,
-        username: state.auth.username
+        user: state.auth.user
     }
 }
 
 const mapDispatchToProps = (dispatch, getState) => {
-    console.log("")
     return {
         // logout :  function(){
         //     dispatch(actions.logout());
