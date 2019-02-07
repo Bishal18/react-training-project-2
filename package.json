@@ -4,13 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
-<<<<<<< HEAD
-    "base-64": "^0.1.0",
-    "react": "^16.7.0",
-=======
     "react": "^16.8.0",
     "react-debounce-input": "^3.2.0",
->>>>>>> dba3f9a91c419d01cafa9c3236570e2757409506
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
