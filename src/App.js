@@ -6,7 +6,7 @@ import {
     Switch
 } from 'react-router-dom';
 
-import Header from './containers/Header';
+import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import products from './pages/Products';
@@ -29,9 +29,9 @@ class App extends Component {
                         <Header />
                         <hr />
                         <Switch>
-                            <Route path="/"
+                            <Route path="/home"
                                 exact
-                                render={(props) => (<Home />)} />
+                                component={Home} />
 
                             <Route path="/products"
                                 exact
@@ -41,14 +41,21 @@ class App extends Component {
                                 exact
                                 component={productDetail} />
 
-                            <Route path="/Categories"
+                            <Route path="/categories"
+                                exact
                                 component={categories} />
+
+                            <Route path="/products/bycategory/:categoryId"
+                                exact
+                                component={products} />
 
                             <Route path="/login"
                                 component={Login} />
 
                             <Route path="/cart"
                                 component={Cart} />
+
+                            <Redirect path="/" to="/home" />
 
                             <Route path="*"
                                 render={(props) => (<Home />)} />

@@ -1,20 +1,55 @@
 import React, { Component } from 'react';
-import SearchContainer from '../containers/SearchProduct';
-import CategoryFilter from '../containers/CategoryFilter';
-
+import SearchProduct from '../components/SearchProduct';
+import CategoryFilter from '../components/CategoryFilter';
+import config from '../configs/config';
 
 class Filter extends Component {
+
+    state = {
+        filterCategory: '',
+        searchQuery: ''
+    }
+
+    onFilter = (e, type) => {
+        switch (type) {
+            case config.filterType.searchFilter:
+                this.setState({ searchQuery: e.target.value || '' },
+                    () => this.updateProducts());
+                break;
+            case config.filterType.categoryFilter:
+                this.setState({ filterCategory: e.target.value !== '0' ? e.target.value : '' },
+                    () => this.updateProducts());
+                break;
+            default:
+                break;
+        }
+    }
+
+    updateProducts = () => {
+        var params = [];
+        if (this.state.filterCategory !== '') {
+            params = [...params, {
+                name: "categoryId", value: this.state.filterCategory
+            }]
+        }
+
+        if (this.state.searchQuery !== '') {
+            params = [...params, {
+                name: "q", value: this.state.searchQuery
+            }]
+        }
+        this.props.fetchProducts(config.listingType.filterProductsListing, params);
+    }
+
     render() {
-        let { filterType: { searchFilter, categoryFilter } } = this.props;
         return (
             <div className="row">
                 <div className="col-md-4 offset-md-2">
-                    <SearchContainer type={searchFilter} />
+                    <SearchProduct onFilter={this.onFilter} />
                 </div>
                 <div className="col-md-4 offset-md-2">
-                    <CategoryFilter type={categoryFilter} />
+                    <CategoryFilter onFilter={this.onFilter} selectedCategory={this.props.selectedCategory} />
                 </div>
-
             </div>
         );
     }

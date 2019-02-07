@@ -25,8 +25,11 @@ const config = {
     listingType: {
         allProductsListing: 'allProductsListing',
         topProductsListing: 'topProductsListing',
-        filterProductsListing: 'filterProductsListing',
-        searchProductsListing: 'searchProductsListing'
+        filterProductsListing: 'filterProductsListing'
+    },
+    filterType: {
+        searchFilter: 'searchFilter',
+        categoryFilter: 'categoryFilter'
     }
 }
 export default config

@@ -4,11 +4,8 @@ import axios from 'axios';
 import StarRatings from 'react-star-ratings';
 
 class ProductDescription extends Component {
-    constructor(props){
-        super(props)
-        this.state ={
-            productDesc : []
-        }
+    state = {
+        productDesc: []
     }
 
     componentDidMount() {
@@ -17,40 +14,53 @@ class ProductDescription extends Component {
             .then(response => {
                 var productDesc = response.data;
                 this.setState({ productDesc });
-               
+
             })
             .catch(function (error) {
                 console.log("Error in ProductDescription action: " + error);
-            });  
+            });
     }
 
     render() {
         let { productDesc } = this.state;
-        console.log("category", productDesc);
         return (
-            <div className="row">
-            {
-                (productDesc)
-                &&
-                productDesc.map((detail) => (
-                    <div>
-                    <h1>{detail.name}</h1>
-                    <img src={detail.imageUrl} className="card-img-top" />
-                    <p>{detail.shortDescription}</p>
-                    <p>Price : {detail.price}</p>
-                    <StarRatings rating={detail.ratings.avgRating}
-                                        starRatedColor="yellow"
-                                        numberOfStars={config.totalStars}
-                                        name='rating'
-                                        starDimension="20px"
-                                        starSpacing="3px" />
-                                    <p>({detail.ratings.totalReviews} rated)</p>
-                    <p><h4>Description : </h4></p> 
-                    <p>{detail.longDescription}</p>                 
-                    </ div>
-                ))
-            }
-        </div>
+            <div>
+                {
+                    (productDesc)
+                    &&
+                    productDesc.map((detail) => (
+                        <div>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <div className="row">
+                                        <div className="col-md-5">
+                                            <img src={detail.imageUrl} alt={detail.name} />
+                                        </div>
+                                        <div className="col-md-5 offset-md-2">
+                                            <p>{detail.name}</p>
+                                            <p>{detail.price}</p>
+                                            <StarRatings rating={detail.ratings.avgRating}
+                                                starRatedColor="yellow"
+                                                numberOfStars={config.totalStars}
+                                                name='rating'
+                                                starDimension="20px"
+                                                starSpacing="3px" />
+                                            <p>({detail.ratings.totalReviews} rated)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                </div>
+
+                            </div>
+
+                            <h3>Description</h3>
+                            <p>{detail.longDescription}</p>
+
+                        </div>
+                    ))
+                }
+            </div>
         );
     }
 }

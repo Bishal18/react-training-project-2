@@ -31,7 +31,6 @@ export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
     var apiUrl = utils.getProductApiUrl(type, filterParams);
     axios.get(apiUrl)
         .then(response => {
-            console.log(response.data);
             dispatch(getProducts(response.data));
         })
         .catch(function (error) {

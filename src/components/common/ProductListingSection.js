@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import Card from './Card';
+import ProductCard from './ProductCard';
+import config from '../../configs/config';
 
 class ProductListingSection extends Component {
     componentDidMount() {
-        this.props.fetchProducts(this.props.type);
+        let { fetchProducts, selectedCategory } = this.props;
+        if (selectedCategory) {
+            var params = [{
+                name: "categoryId", value: selectedCategory
+            }];
+            fetchProducts(config.listingType.filterProductsListing, params);
+        }
+        else {
+            fetchProducts(this.props.type);
+        }
     }
 
     render() {
@@ -11,13 +21,12 @@ class ProductListingSection extends Component {
         return (
             <div className="row">
                 {
-                    (products)
-                    &&
-                    products.map((product, index) => (
-                        <Card key={index}
-                            cardDetail={product}
-                            type="ProductCard" />
-                    ))
+                    (products && products.length > 0)
+                        ? products.map((product, index) => (
+                            <ProductCard key={index}
+                                cardDetail={product} />
+                        ))
+                        : <h3>Products Not Found!</h3>
                 }
             </div>
         );

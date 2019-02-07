@@ -8,8 +8,8 @@ const mapStateToProps = ({ listing: { products } }) => ({
 
 const mapDispatchToProps = (dispatch, getState) => {
     return {
-        fetchProducts: (type) => (
-            dispatch(actions.fetchProducts(type))
+        fetchProducts: (type, params) => (
+            dispatch(actions.fetchProducts(type, params))
         )
     }
 }
