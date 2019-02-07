@@ -27,6 +27,18 @@ const config = {
         topProductsListing: 'topProductsListing',
         filterProductsListing: 'filterProductsListing',
         searchProductsListing: 'searchProductsListing'
-    }
+    },
+    formDetails:[
+   
+            {fieldname:"Name"},
+            {fieldname: "Address"},
+            {fieldname:"City"}, 
+            {fieldname:"State"},
+            {fieldname:"Pincode"}
+  
+    ]
+       
+      
+    
 }
 export default config
