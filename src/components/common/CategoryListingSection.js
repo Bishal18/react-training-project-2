@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from './Card';
+import CategoryCard from './CategoryCard';
 import * as utility from '../../utilities/api';
 
 
@@ -23,9 +23,8 @@ class CategoryListingSection extends Component {
                     (categoryList)
                     &&
                     categoryList.map((category, index) => (
-                        <Card key={index}
-                            cardDetail={category}
-                            type="CategoryCard" />
+                        <CategoryCard key={index}
+                            cardDetail={category} />
                     ))
                 }
             </div>

@@ -6,21 +6,21 @@ const ShippingForm = (props) => {
 
     const details = config.formDetails;
     //console.log(">>>" + details)
-    const data = details.map((item,index)=>{
-        return(
+    const data = details.map((item, index) => {
+        return (
             <div className="form-group" key={index}>
                 <label >{item.fieldname}:</label>
                 <input type="text" className="form-control" />
             </div>
         )
     })
-     return(
-             <div className=" col-md-5">
-                    {data}
-                    <button className="btn btn-primary">Place Order</button>
-            </div>
-        )
+    return (
+        <div>
+            {data}
+            <button className="btn btn-primary">Place Order</button>
+        </div>
+    )
 }
-    
+
 
 export default ShippingForm;

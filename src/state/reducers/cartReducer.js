@@ -10,17 +10,9 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         case ActionTypes.UPDATE_ITEMS:
             var index = state.cartItems.findIndex(item => item.id === action.payload.product.id);
             if (index !== -1) {
-                var updatedProduct = {
-                    ...state.cartItems[index],
-                    qty: action.payload.type === "add" ? state.cartItems[index].qty + 1 : state.cartItems[index].qty - 1
-                };
-                return {
-                    ...state, cartItems: [
-                        ...state.cartItems.slice(0, index),
-                        updatedProduct,
-                        ...state.cartItems.slice(index + 1)
-                    ]
-                }
+                return action.payload.product.qty > 0
+                    ? { ...state, cartItems: [...state.cartItems.slice(0, index), action.payload.product, ...state.cartItems.slice(index + 1)] }
+                    : { ...state, cartItems: [...state.cartItems.slice(0, index), ...state.cartItems.slice(index + 1)] }
             }
             return { ...state, cartItems: [...state.cartItems, action.payload.product] };
         case ActionTypes.REMOVE_FROM_CART:
@@ -29,24 +21,6 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
                     cartItem => cartItem.id !== action.payload.productId
                 )
             };
-
-        case ActionTypes.BUY_NOW:
-        var index = state.cartItems.findIndex(item => item.id === action.payload.product.id);
-            if (index !== -1) {
-                var updatedProduct = {
-                    ...state.cartItems[index],
-                    qty: action.payload.type === "add" ? state.cartItems[index].qty + 1 : state.cartItems[index].qty - 1
-                };
-                return {
-                    ...state, cartItems: [
-                        ...state.cartItems.slice(0, index),
-                        updatedProduct,
-                        ...state.cartItems.slice(index + 1)
-                    ]
-                }
-            }
-            return { ...state, cartItems: [...state.cartItems, action.payload.product] };
-        
         default:
             return state;
     }

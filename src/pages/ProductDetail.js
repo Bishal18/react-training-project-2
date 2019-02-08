@@ -4,11 +4,9 @@ import ProductDescription from '../components/ProductDescription';
 const productDetail = (props) => {
     console.log("productDetail", props.match.params.productId);
     return (
-        <div>Product Detail : 
-             <div>
+        <div>
             <br />
-            <ProductDescription productId={props.match.params.productId}/>
-            </div>
+            <ProductDescription productId={props.match.params.productId} />
         </div>
 
     )

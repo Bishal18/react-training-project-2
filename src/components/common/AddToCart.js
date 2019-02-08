@@ -2,26 +2,33 @@ import React, { Component } from 'react';
 
 class AddToCart extends Component {
     render() {
-        console.log('AddToCart', this.props);
-        let { product, cartItems } = this.props;
-        product.qty = 1;
-        var index = cartItems.findIndex(item => item.id === product.id)
+        let { product: { id, name, price }, cartItems } = this.props;
+        this.product = { id, name, price, qty: 0 };
+        this.product.totalPrice = this.product.qty * this.product.price;
+        let cartItem = cartItems.find(item => item.id === this.product.id);
+
         return (
-            <div className="row">
+            <div>
                 {
-                    index !== -1 && cartItems[index].qty > 0
+                    cartItem && cartItem.qty > 0
                         ? <div className="row">
                             <div className="col-md-3">
-                                <button className="btn btn-primary" onClick={(e) => this.props.updateCart(product)} >-</button>
+                                <span className="btn btn-primary" onClick={(e) => this.props.updateCart({
+                                    ...cartItem, qty: cartItem.qty - 1, totalPrice: (cartItem.qty - 1) * cartItem.price
+                                })} >-</span>
                             </div>
                             <div className="col-md-2 offset-md-1">
-                                <p>{cartItems[index].qty}</p>
+                                <p>{cartItem.qty}</p>
                             </div>
                             <div className="col-md-3">
-                                <button className="btn btn-primary" onClick={(e) => this.props.addToCart(product)} >+</button>
+                                <span className="btn btn-primary" onClick={(e) => this.props.updateCart({
+                                    ...cartItem, qty: cartItem.qty + 1, totalPrice: (cartItem.qty + 1) * cartItem.price
+                                })} >+</span>
                             </div>
                         </div>
-                        : <button className="btn btn-primary" onClick={(e) => this.props.addToCart(product)} >+Cart</button>
+                        : <button className="btn btn-primary" onClick={(e) => this.props.updateCart({
+                            ...this.product, qty: this.product.qty + 1, totalPrice: (this.product.qty + 1) * this.product.price
+                        })} >+Cart</button>
                 }
 
             </div>

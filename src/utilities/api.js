@@ -8,18 +8,18 @@ export const getProductApiUrl = (type, filterParams = []) => {
             apiUrl += `?_sort=views&_order=desc&_limit=${config.topProductsCount}`;
             break;
         case config.listingType.filterProductsListing:
-            var queryParams = filterParams.map((filter) => (
-                `&${filter.name}=${filter.value}`
+            console.log('filterProductsListing', filterParams);
+            var queryParams = '';
+            filterParams.map((filter) => (
+                queryParams += queryParams === ''
+                    ? `?${filter.name}=${filter.value}`
+                    : `&${filter.name}=${filter.value}`
             ));
-            apiUrl += `?${queryParams}`;
-            break;
-        case config.listingType.searchProductsListing:
-            apiUrl += filterParams && `?q=${filterParams[0].query}`;
+            apiUrl += `${queryParams}`;
             break;
         default:
             break;
     }
-    console.log(apiUrl);
     return apiUrl;
 }
 

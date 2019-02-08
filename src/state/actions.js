@@ -8,9 +8,9 @@ export const getProducts = (products) => ({
     payload: { products }
 })
 
-export const updateCart = (type, product) => ({
+export const updateCart = (product) => (console.log('update', product), {
     type: ActionTypes.UPDATE_ITEMS,
-    payload: { type, product }
+    payload: { product }
 })
 
 export const removeFromCart = (productId) => ({
@@ -18,16 +18,15 @@ export const removeFromCart = (productId) => ({
     payload: { productId }
 })
 
-export const buyNow = (product) =>({
+export const buyNow = (product) => ({
     type: ActionTypes.BUY_NOW,
-    payload:{product}
+    payload: { product }
 })
 
 export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
     var apiUrl = utils.getProductApiUrl(type, filterParams);
     axios.get(apiUrl)
         .then(response => {
-            console.log(response.data);
             dispatch(getProducts(response.data));
         })
         .catch(function (error) {
@@ -44,7 +43,7 @@ export const logout = () => ({
     type: ActionTypes.LOGOUT
 })
 
-export const validateToken = () =>({
+export const validateToken = () => ({
     type: ActionTypes.VALIDATE_TOKEN
 })
 
