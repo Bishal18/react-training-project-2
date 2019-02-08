@@ -13,7 +13,8 @@ import products from './pages/Products';
 import categories from './pages/Categories';
 import Login from './containers/Login'
 import productDetail from './pages/ProductDetail';
-import Cart from './containers/Cart';
+import cart from './pages/Cart';
+import checkout from './pages/Checkout';
 
 class App extends Component {
 
@@ -52,8 +53,12 @@ class App extends Component {
                             <Route path="/login"
                                 component={Login} />
 
+                            <Route path="/checkout"
+                                exact
+                                component={checkout} />
+
                             <Route path="/cart"
-                                component={Cart} />
+                                component={cart} />
 
                             <Redirect path="/" to="/home" />
 

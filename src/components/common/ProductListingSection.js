@@ -17,14 +17,15 @@ class ProductListingSection extends Component {
     }
 
     render() {
-        let { products } = this.props;
+        let { products, updateCart } = this.props;
         return (
             <div className="row">
                 {
                     (products && products.length > 0)
                         ? products.map((product, index) => (
                             <ProductCard key={index}
-                                cardDetail={product} />
+                                cardDetail={product}
+                                buyNow={updateCart} />
                         ))
                         : <h3>Products Not Found!</h3>
                 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import config from '../configs/config';
+import AddToCart from '../containers/AddToCart';
 import axios from 'axios';
 import StarRatings from 'react-star-ratings';
 
@@ -28,35 +29,38 @@ class ProductDescription extends Component {
                 {
                     (productDesc)
                     &&
-                    productDesc.map((detail) => (
-                        <div>
+                    productDesc.map((detail, index) => (
+                        <div key={index}>
+                            <h2>{detail.name}</h2>
+                            <br />
                             <div className="row">
-                                <div className="col-md-6">
+                                <div className="col-md-7">
                                     <div className="row">
                                         <div className="col-md-5">
                                             <img src={detail.imageUrl} alt={detail.name} />
                                         </div>
                                         <div className="col-md-5 offset-md-2">
-                                            <p>{detail.name}</p>
-                                            <p>{detail.price}</p>
-                                            <StarRatings rating={detail.ratings.avgRating}
-                                                starRatedColor="yellow"
-                                                numberOfStars={config.totalStars}
-                                                name='rating'
-                                                starDimension="20px"
-                                                starSpacing="3px" />
-                                            <p>({detail.ratings.totalReviews} rated)</p>
+                                            <h4>{detail.name}</h4>
+                                            <h5>{detail.price} INR</h5>
+                                            <div>
+                                                <StarRatings rating={detail.ratings.avgRating}
+                                                    starRatedColor="yellow"
+                                                    numberOfStars={config.totalStars}
+                                                    name='rating'
+                                                    starDimension="20px"
+                                                    starSpacing="3px" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-md-4 offset-md-1">
+                                    <h3>Add To Cart</h3>
+                                    <AddToCart product={detail} />
                                 </div>
-
                             </div>
-
+                            <br />
                             <h3>Description</h3>
                             <p>{detail.longDescription}</p>
-
                         </div>
                     ))
                 }

@@ -10,12 +10,18 @@ class ProductCard extends Component {
         this.props.history.push(`/products/${productId}`);
     }
 
+    callBuyNow = () => {
+        let { cardDetail } = this.props;
+        this.props.buyNow({ ...cardDetail, qty: 1, totalPrice: cardDetail.price });
+        this.props.history.push('/checkout');
+    }
+
     render() {
         let { cardDetail, cardDetail: { id, name, shortDescription, imageUrl, ratings } } = this.props;
         return (
             <div className="col-md-3">
                 <div className="card">
-                    <img onClick={() => this.onClickMore(id)} style={{cursor:'pointer'}} src={imageUrl} className="card-img-top" alt={name} />
+                    <img onClick={() => this.onClickMore(id)} style={{ cursor: 'pointer' }} src={imageUrl} className="card-img-top" alt={name} />
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
                         <div className="cardDetails">
@@ -29,7 +35,7 @@ class ProductCard extends Component {
                             <p className="card-text">{shortDescription}</p>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <a href="#" className="btn btn-primary">Buy Now</a>
+                                    <button className="btn btn-primary" onClick={this.callBuyNow}>Buy Now</button>
                                 </div>
                                 <div className="col-md-6">
                                     <AddToCart product={cardDetail} />

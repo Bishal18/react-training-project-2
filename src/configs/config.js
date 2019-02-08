@@ -30,6 +30,13 @@ const config = {
     filterType: {
         searchFilter: 'searchFilter',
         categoryFilter: 'categoryFilter'
-    }
+    },
+    formDetails: [
+        { fieldname: "Name" },
+        { fieldname: "Address" },
+        { fieldname: "City" },
+        { fieldname: "State" },
+        { fieldname: "Pincode" }
+    ]
 }
 export default config

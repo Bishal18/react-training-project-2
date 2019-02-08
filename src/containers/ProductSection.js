@@ -10,7 +10,10 @@ const mapDispatchToProps = (dispatch, getState) => {
     return {
         fetchProducts: (type, params) => (
             dispatch(actions.fetchProducts(type, params))
-        )
+        ),
+        updateCart: (product) => {
+            dispatch(actions.updateCart(product))
+        }
     }
 }
 
