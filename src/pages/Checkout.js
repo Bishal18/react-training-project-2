@@ -1,19 +1,21 @@
-import CheckoutTable from '../components/CheckoutTable'
+import React from 'react';
+import CartSummary from '../containers/CartSummary'
 import ShippingForm from '../components/ShippingForm'
 
-import React, { Component } from 'react';
-
-const Checkout = (props) =>{
-    //console.log("CheoutPage", props.cartItems)
+const checkout = () => {
     return (
         <div>
             <h2>Checkout</h2>
             <div className="row">
-                <CheckoutTable cartItems={props.cartItems}/>
-                <ShippingForm  />
+                <div className="col-md-6">
+                    <CartSummary type="checkout"/>
+                </div>
+                <div className="col-md-6">
+                    <ShippingForm />
+                </div>
             </div>
         </div>
     );
 }
 
-export default Checkout;
+export default checkout;

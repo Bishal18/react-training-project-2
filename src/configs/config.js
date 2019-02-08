@@ -25,20 +25,18 @@ const config = {
     listingType: {
         allProductsListing: 'allProductsListing',
         topProductsListing: 'topProductsListing',
-        filterProductsListing: 'filterProductsListing',
-        searchProductsListing: 'searchProductsListing'
+        filterProductsListing: 'filterProductsListing'
     },
-    formDetails:[
-   
-            {fieldname:"Name"},
-            {fieldname: "Address"},
-            {fieldname:"City"}, 
-            {fieldname:"State"},
-            {fieldname:"Pincode"}
-  
+    filterType: {
+        searchFilter: 'searchFilter',
+        categoryFilter: 'categoryFilter'
+    },
+    formDetails: [
+        { fieldname: "Name" },
+        { fieldname: "Address" },
+        { fieldname: "City" },
+        { fieldname: "State" },
+        { fieldname: "Pincode" }
     ]
-       
-      
-    
 }
 export default config
