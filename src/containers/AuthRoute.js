@@ -6,18 +6,17 @@ import { bindActionCreators } from 'redux';
 import AuthRoute from '../components/common/AuthRoute';
 
 const mapStateToProps = (state) => {
-    console.log("mapStateToProps AuthRoute", state);
     return {
-        authenthicated: state.auth.user !== null ? false: true,
+        authenticated: state.auth.authenticated
     }
 }
 
-const mapDispatchToProps = (dispatch, getState) => {
-    return {
-        authenticateUser: () => {
-            dispatch(actions.validateToken());
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch, getState) => {
+//     return {
+//         authenticateUser: () => {
+//             dispatch(actions.validateToken());
+//         }
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthRoute);
+export default connect(mapStateToProps)(AuthRoute);

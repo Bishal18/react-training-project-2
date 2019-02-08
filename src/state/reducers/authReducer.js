@@ -1,16 +1,16 @@
 import * as ActionTypes from '../action-types';
-import config from '../../configs/config';
 
 const INITIAL_STATE = {
+    authenticated: false,
     user: null
 }
 
 export const authReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ActionTypes.LOGOUT:
-            return { ...state, user: null }
+            return { ...state, authenticated: false, user: null }
         case ActionTypes.LOGIN:
-            return {...state, user: action.payload.user}
+            return {...state, authenticated: true, user: action.payload.user}
         default:
             return state;
     }

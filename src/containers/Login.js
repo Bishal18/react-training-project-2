@@ -1,14 +1,12 @@
 import { connect } from 'react-redux';
-
 import * as actions from '../state/actions';
-import { bindActionCreators } from 'redux';
 
 import Login from '../pages/Login';
 
 const mapStateToProps = (state) => {
-    console.log("mapStateToProps login", state);
     return {
-        user: state.auth.user,
+        authenticated: state.auth.authenticated,
+        user: state.auth.user
     }
 }
 

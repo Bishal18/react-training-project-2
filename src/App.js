@@ -12,9 +12,10 @@ import Home from './pages/Home';
 import products from './pages/Products';
 import categories from './pages/Categories';
 import Checkout from './containers/CheckoutTable';
-import Login from './pages/Login'
+import Login from './containers/Login';
 import productDetail from './pages/ProductDetail';
 import Cart from './containers/Cart';
+import AuthRoute from './containers/AuthRoute';
 
 class App extends Component {
 
@@ -48,8 +49,11 @@ class App extends Component {
                             <Route path="/login"
                                 component={Login} />
 
-                             <Route path="/Checkout"
-                                component={Checkout} />
+                            {/* <Route path="/Checkout"
+                                component={Checkout} /> */}
+
+                            <AuthRoute path='/checkout'
+                               component={Checkout} />
 
                             <Route path="/cart"
                                 component={Cart} />
