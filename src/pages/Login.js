@@ -62,19 +62,40 @@ class Login extends React.Component {
             return (
                 <div>
                     <h2>Login</h2>
+                    <br/>
+
                     <form onSubmit={(e) => this.onSubmit(e)}>
-                        <div className="form-group">
-                            <label>Username </label>
-                            <input type="text" name="username" onChange={(e) => this.onChange(e)} />
+                        <div className="row">
+                            <div className="col-md-1">
+                                <label>Username </label>
+                            </div>
+                            <div className="col-md-1">
+                                <input type="text" name="username" onChange={(e) => this.onChange(e)} />
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <label>Password </label>
-                            <input type="password" name="password" onChange={(e) => this.onChange(e)} />
+                        <div className="row">
+                            <div className="col-md-1">
+                                <label>Password </label>
+                            </div>
+                            <div className="col-md-1">
+                                <input type="password" name="password" onChange={(e) => this.onChange(e)} />
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <input type="submit" value="Login" />
+                        <br/>
+                        <div className="row">
+                            <div className="col-md-2">
+                                <input type="submit" value="Login" />
+                            </div>
                         </div>
-                        <label>{this.state.errorMsg}</label>
+                        <br/>
+                        <div className="row">
+                            {
+                                this.state.errorMsg ? (
+                                    <div className="alert alert-danger">
+                                        {this.state.errorMsg}</div>
+                                ) : ''
+                            }
+                        </div>
                     </form>
                 </div>
             );
