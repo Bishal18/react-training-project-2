@@ -1,6 +1,6 @@
 import React from 'react';
 import CartSummary from '../containers/CartSummary'
-import ShippingForm from '../components/ShippingForm'
+import CheckoutForm from '../containers/CheckoutForm'
 
 const checkout = () => {
     return (
@@ -11,7 +11,7 @@ const checkout = () => {
                     <CartSummary type="checkout"/>
                 </div>
                 <div className="col-md-6">
-                    <ShippingForm />
+                    <CheckoutForm />
                 </div>
             </div>
         </div>

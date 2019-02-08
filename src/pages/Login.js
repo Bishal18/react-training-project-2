@@ -63,7 +63,6 @@ class Login extends React.Component {
                 <div>
                     <h2>Login</h2>
                     <br/>
-
                     <form onSubmit={(e) => this.onSubmit(e)}>
                         <div className="row">
                             <div className="col-md-1">
@@ -84,7 +83,7 @@ class Login extends React.Component {
                         <br/>
                         <div className="row">
                             <div className="col-md-2">
-                                <input type="submit" value="Login" />
+                                <input type="submit" className="btn btn-primary" value="Login" />
                             </div>
                         </div>
                         <br/>

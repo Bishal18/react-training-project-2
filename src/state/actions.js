@@ -62,4 +62,13 @@ export const autheticateUser = (username, password, callback) => (dispatch, getS
         });
 }
 
-
+export const placeOrder = (data) => (dispatch, getState) => {
+    var apiUrl = `${config.baseApiUrl}${config.apiRoutes.orderRoute}`
+    axios.post(apiUrl, data)
+        .then(response => {
+            console.log("Response", response.data);
+        })
+        .catch(function (error) {
+            console.log("Error in placeOrder action: " + error);
+        });
+}
