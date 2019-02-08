@@ -1,21 +1,25 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log("login constructor", this.props);
         this.state = {
+            authenticated: props.authenticated,
+            fromLocation: props.location.state ? props.location.state.from : '',
             username: '',
             password: '',
             errorMsg: ''
         };
     }
 
-    componentWillMount() {
-        console.log("login componentWillMount", this.props.user);
-        if (this.props.user) {
-            this.props.history.replace('/');
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.authenticated !== prevState.authenticated) {
+            return { authenticated: nextProps.authenticated };
+        }
+        else {
+            return null;
         }
     }
 
@@ -30,9 +34,13 @@ class Login extends React.Component {
     }
 
     isLoginSuccess = (success, dispatch) => {
-        console.log("login callback", success);
         if (success) {
-            this.props.history.replace('/');
+            if (this.state.fromLocation) {
+                this.props.history.replace(this.state.fromLocation.pathname);
+            }
+            else {
+                this.props.history.replace('/');
+            }
         }
         else {
             this.setState({
@@ -40,32 +48,37 @@ class Login extends React.Component {
             });
         }
     }
+
     onSubmit(event) {
         event.preventDefault();
         this.props.login(this.state.username, this.state.password, this.isLoginSuccess);
     }
 
-    compo
     render() {
-        return (
-            <div>
-                <h2>Login</h2>
-                <form onSubmit={(e) => this.onSubmit(e)}>
-                    <div className="form-group">
-                        <label>Username </label>
-                        <input type="text" name="username" onChange={(e) => this.onChange(e)} />
-                    </div>
-                    <div className="form-group">
-                        <label>Password </label>
-                        <input type="password" name="password" onChange={(e) => this.onChange(e)} />
-                    </div>
-                    <div className="form-group">
-                        <input type="submit" value="Login" />
-                    </div>
-                    <label>{this.state.errorMsg}</label>
-                </form>
-            </div>
-        );
+        if (this.state.authenticated) {
+            return (<Redirect to="/" />);
+        }
+        else {
+            return (
+                <div>
+                    <h2>Login</h2>
+                    <form onSubmit={(e) => this.onSubmit(e)}>
+                        <div className="form-group">
+                            <label>Username </label>
+                            <input type="text" name="username" onChange={(e) => this.onChange(e)} />
+                        </div>
+                        <div className="form-group">
+                            <label>Password </label>
+                            <input type="password" name="password" onChange={(e) => this.onChange(e)} />
+                        </div>
+                        <div className="form-group">
+                            <input type="submit" value="Login" />
+                        </div>
+                        <label>{this.state.errorMsg}</label>
+                    </form>
+                </div>
+            );
+        }
     }
 }
 

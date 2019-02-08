@@ -5,7 +5,6 @@ import * as actions from '../state/actions'
 
 function authenticateUser(store) {
     const authToken = window.localStorage.getItem('authToken');
-    console.log('auth token', authToken);
     if (authToken) {
         const data = base64.decode(authToken).split(':');
         const api = `${config.baseApiUrl}${config.apiRoutes.usersRoute}?username=${data[0]}&password=${data[1]}`
@@ -20,12 +19,9 @@ function authenticateUser(store) {
 }
 
 function authMiddleware(store) {
-    console.log("authMiddleware");
     return function (nextFunc) {
         return function (action) {
             const state = store.getState();
-            console.log('AUTH MIDDLEWARE', state, action);
-
             const result = nextFunc(action);
 
             if (action.type && action.type === ActionTypes.VALIDATE_TOKEN) {

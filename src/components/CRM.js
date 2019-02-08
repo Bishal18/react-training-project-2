@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-
 import { NavLink } from "react-router-dom";
 
 class CRM extends Component {
-
     componentWillMount() {
-        console.log("crm props", this.props);
         this.props.actions.validateToken();
     }
+    
     render() {
         var { user } = this.props;
         return (

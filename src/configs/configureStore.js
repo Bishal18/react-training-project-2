@@ -11,7 +11,10 @@ const configureStore = () => {
         cart: cartReducer,
         listing: listingReducer
     });
-    return createStore(rootReducer, applyMiddleware(authMiddleware,ReduxThunk));
+
+    const initialState = {};
+
+    return createStore(rootReducer, initialState, applyMiddleware(authMiddleware,ReduxThunk));
 }
 
 export default configureStore;

@@ -15,6 +15,8 @@ import Login from './containers/Login'
 import productDetail from './pages/ProductDetail';
 import cart from './pages/Cart';
 import checkout from './pages/Checkout';
+import notFound from './pages/NotFound';
+import AuthRoute from './containers/AuthRoute';
 
 class App extends Component {
 
@@ -53,17 +55,16 @@ class App extends Component {
                             <Route path="/login"
                                 component={Login} />
 
-                            <Route path="/checkout"
-                                exact
+                            <AuthRoute path='/checkout'
                                 component={checkout} />
 
                             <Route path="/cart"
                                 component={cart} />
 
-                            <Redirect path="/" to="/home" />
+                            <Redirect exact path="/" to="/home" />
 
                             <Route path="*"
-                                render={(props) => (<Home />)} />
+                                component={notFound} />
 
                         </Switch>
                         <hr />
