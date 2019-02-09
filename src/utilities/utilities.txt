@@ -1,2 +1,0 @@
-#-------------------------------
-All utility functions (common functions to be used throughout the project) comes here.

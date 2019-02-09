@@ -2,7 +2,7 @@ import React from 'react';
 import AddToCart from '../containers/AddToCart';
 import { withRouter } from 'react-router-dom';
 
-const CartSummary = (props) => {
+const cartSummary = (props) => {
     var totalQty = 0;
     var totalPrice = 0;
 
@@ -58,4 +58,4 @@ const CartSummary = (props) => {
     )
 }
 
-export default withRouter(CartSummary);
+export default withRouter(cartSummary);

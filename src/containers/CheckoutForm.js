@@ -2,15 +2,15 @@ import { connect } from 'react-redux';
 import * as actions from '../state/actions';
 import ShippingForm from '../components/ShippingForm';
 
-const mapStateToProps = ({ cart: { cartItems }, auth: { user: {id} } }) => ({
+const mapStateToProps = ({ cart: { cartItems }, auth: { user: { id } } }) => ({
     cartItems,
     userId: id
 });
 
 const mapDispatchToProps = (dispatch, getState) => {
     return {
-        placeOrder: (formData) => (
-            dispatch(actions.placeOrder(formData))
+        placeOrder: (formData, history) => (
+            dispatch(actions.placeOrder(formData, history))
         )
     }
 }

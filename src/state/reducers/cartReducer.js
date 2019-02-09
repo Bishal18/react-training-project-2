@@ -1,6 +1,5 @@
 import * as ActionTypes from '../action-types';
-import config from '../../configs/config';
-
+import * as cartUtil from '../../utilities/cartUtil';
 const INITIAL_STATE = {
     cartItems: []
 }
@@ -8,19 +7,11 @@ const INITIAL_STATE = {
 export const cartReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ActionTypes.UPDATE_ITEMS:
-            var index = state.cartItems.findIndex(item => item.id === action.payload.product.id);
-            if (index !== -1) {
-                return action.payload.product.qty > 0
-                    ? { ...state, cartItems: [...state.cartItems.slice(0, index), action.payload.product, ...state.cartItems.slice(index + 1)] }
-                    : { ...state, cartItems: [...state.cartItems.slice(0, index), ...state.cartItems.slice(index + 1)] }
-            }
-            return { ...state, cartItems: [...state.cartItems, action.payload.product] };
+            var updatedCartItems = cartUtil.updateCartItems(state.cartItems, action.payload.product);
+            return { ...state, cartItems: [...updatedCartItems] };
         case ActionTypes.REMOVE_FROM_CART:
-            return {
-                ...state, cartItems: state.cartItems.filter(
-                    cartItem => cartItem.id !== action.payload.productId
-                )
-            };
+            var updatedCartItems = cartUtil.removeItemFromCart(state.cartItems, action.payload.productId);
+            return { ...state, cartItems: [...updatedCartItems] };
         default:
             return state;
     }

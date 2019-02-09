@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '../configs/config';
-
+import { withRouter } from 'react-router-dom';
 
 class ShippingForm extends React.Component {
 
@@ -17,7 +17,7 @@ class ShippingForm extends React.Component {
     }
 
     onSubmit = () => {
-        let { userId, cartItems } = this.props;
+        let { userId, cartItems, history } = this.props;
         if (cartItems && cartItems.length > 0) {
             var userDetails = {
                 name: this.state.name,
@@ -42,7 +42,7 @@ class ShippingForm extends React.Component {
                 products: productSent,
                 amountPaid: amount
             }
-            this.props.placeOrder(dataSent);
+            this.props.placeOrder(dataSent, history);
         }
     }
 
@@ -75,4 +75,4 @@ class ShippingForm extends React.Component {
 }
 
 
-export default ShippingForm;
+export default withRouter(ShippingForm);

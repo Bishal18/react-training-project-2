@@ -17,6 +17,7 @@ import cart from './pages/Cart';
 import checkout from './pages/Checkout';
 import notFound from './pages/NotFound';
 import AuthRoute from './containers/AuthRoute';
+import OrderSummary from './containers/OrderSummary';
 
 class App extends Component {
 
@@ -61,10 +62,17 @@ class App extends Component {
                             <Route path="/cart"
                                 component={cart} />
 
+                            <Route path="/orders/:orderId/confirmation"
+                                exact
+                                component={OrderSummary} />
+
+                            <Route path="/notfound"
+                                component={notFound} />
+
                             <Redirect exact path="/" to="/home" />
 
-                            <Route path="*"
-                                component={notFound} />
+                            <Redirect path="*"
+                                to='/notFound' />
 
                         </Switch>
                         <hr />

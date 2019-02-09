@@ -8,7 +8,7 @@ export const getProducts = (products) => ({
     payload: { products }
 })
 
-export const updateCart = (product) => (console.log('update', product), {
+export const updateCart = (product) => ({
     type: ActionTypes.UPDATE_ITEMS,
     payload: { product }
 })
@@ -23,17 +23,6 @@ export const buyNow = (product) => ({
     payload: { product }
 })
 
-export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
-    var apiUrl = utils.getProductApiUrl(type, filterParams);
-    axios.get(apiUrl)
-        .then(response => {
-            dispatch(getProducts(response.data));
-        })
-        .catch(function (error) {
-            console.log("Error in fetchProducts action: " + error);
-        });
-}
-
 export const login = (user) => ({
     type: ActionTypes.LOGIN,
     payload: { user }
@@ -47,10 +36,15 @@ export const validateToken = () => ({
     type: ActionTypes.VALIDATE_TOKEN
 })
 
+export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
+    utils.fetchProducts(type, filterParams)
+        .then(response => {
+            dispatch(getProducts(response));
+        })
+}
+
 export const autheticateUser = (username, password, callback) => (dispatch, getState) => {
-    const api = `${config.baseApiUrl}${config.apiRoutes.usersRoute}?username=${username}&password=${password}`
-    fetch(api)
-        .then(response => response.json())
+    utils.authenticateUser(username, password)
         .then(users => {
             if (users && users.length > 0) {
                 dispatch(login(users[0]));
@@ -59,16 +53,14 @@ export const autheticateUser = (username, password, callback) => (dispatch, getS
             else {
                 callback(false);
             }
-        });
+        })
 }
 
-export const placeOrder = (data) => (dispatch, getState) => {
-    var apiUrl = `${config.baseApiUrl}${config.apiRoutes.orderRoute}`
-    axios.post(apiUrl, data)
+export const placeOrder = (data, history) => (dispatch, getState) => {
+    utils.placeOrder(data)
         .then(response => {
-            console.log("Response", response.data);
+            if (response.status === 201) {
+                history.push(`/orders/${response.data.id}/confirmation`);
+            }
         })
-        .catch(function (error) {
-            console.log("Error in placeOrder action: " + error);
-        });
 }

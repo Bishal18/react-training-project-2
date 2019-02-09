@@ -11,7 +11,7 @@ class CRM extends Component {
         return (
             user ?
                 <React.Fragment >
-                    <b>Hi, {user.username}</b> | <button onClick={this.props.actions.logout}>Logout</button>
+                    <b>Hi, {user.username}</b> | <button className="btn btn-primary" onClick={this.props.actions.logout}>Logout</button>
                 </React.Fragment >
                 :
                 < React.Fragment >

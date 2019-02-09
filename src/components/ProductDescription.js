@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import config from '../configs/config';
 import AddToCart from '../containers/AddToCart';
-import axios from 'axios';
 import StarRatings from 'react-star-ratings';
+import * as utils from '../utilities/api';
 
 class ProductDescription extends Component {
     state = {
@@ -10,15 +10,9 @@ class ProductDescription extends Component {
     }
 
     componentDidMount() {
-        let apiUrl = `${config.baseApiUrl}${config.apiRoutes.productRoute}?id=${this.props.productId}`;
-        axios.get(apiUrl)
-            .then(response => {
-                var productDesc = response.data;
+        utils.fetchProducts(config.listingType.filterProductsListing, [{ name: 'id', value: this.props.productId }])
+            .then(productDesc => {
                 this.setState({ productDesc });
-
-            })
-            .catch(function (error) {
-                console.log("Error in ProductDescription action: " + error);
             });
     }
 
