@@ -9,7 +9,8 @@ class ShippingForm extends React.Component {
         address: '',
         city: '',
         state: '',
-        pincode: ''
+        pincode: '',
+        errorMsgs: []
     }
 
     onChange = (event) => {
@@ -18,32 +19,44 @@ class ShippingForm extends React.Component {
 
     onSubmit = () => {
         let { userId, cartItems, history } = this.props;
-        if (cartItems && cartItems.length > 0) {
-            var userDetails = {
-                name: this.state.name,
-                address: this.state.address,
-                city: this.state.city,
-                state: this.state.stateName,
-                pincode: this.state.pincode
-            }
-            var productSent = [];
-            var amount = 0;
+        let { name, address, city, state, pincode } = this.state;
+        if (this.validateForm(this.state) && cartItems && cartItems.length > 0) {
+            var userDetails = { name, address, city, state, pincode };
+            var products = [];
+            var amountPaid = 0;
             cartItems.map((product) => {
-                var item = {
-                    id: product.id,
-                    qty: product.qty
-                }
-                amount = amount + (product.qty * product.price)
-                productSent.push(item)
+                var item = { id: product.id, qty: product.qty };
+                products = [...products, item];
+                amountPaid += (product.qty * product.price);
             });
-            var dataSent = {
-                userId,
-                userDetails: userDetails,
-                products: productSent,
-                amountPaid: amount
-            }
+            var dataSent = { userId, userDetails, products, amountPaid };
             this.props.placeOrder(dataSent, history);
         }
+    }
+
+    validateForm = ({ name, address, city, state, pincode }) => {
+        var errorMsgs = [];
+        if (!name) {
+            errorMsgs = [...errorMsgs, { name: 'name', errorMsg: "Invalid Name!" }];
+        }
+        if (!address) {
+            errorMsgs = [...errorMsgs, { name: 'address', errorMsg: "Invalid Address!" }];
+        }
+        if (!city) {
+            errorMsgs = [...errorMsgs, { name: 'city', errorMsg: "Invalid City!" }];
+        }
+        if (!state) {
+            errorMsgs = [...errorMsgs, { name: 'state', errorMsg: "Invalid State!" }];
+        }
+        if (!(pincode && /[\d]{6}/.test(pincode))) {
+            errorMsgs = [...errorMsgs, { name: 'pincode', errorMsg: "Invalid Pincode!" }];
+        }
+        if (errorMsgs.length > 0) {
+            console.log(errorMsgs);
+            this.setState({ errorMsgs });
+            return false;
+        }
+        return true;
     }
 
     render() {
@@ -54,16 +67,20 @@ class ShippingForm extends React.Component {
                     &&
                     <div>
                         {
-                            config.formDetails.map((item, index) => (
-                                <div className="form-group" key={index}>
-                                    <label >{item.fieldname}:</label>
-                                    <input type="text"
-                                        name={item.fieldname.toLowerCase()}
-                                        className="form-control"
-                                        value={this.state[item.fieldname.toLowerCase()]}
-                                        onChange={this.onChange} />
-                                </div>
-                            ))
+                            config.formDetails.map((item, index) => {
+                                var error = this.state.errorMsgs.filter(msg => msg.name.toLowerCase() === item.fieldname.toLowerCase())[0];
+                                return (
+                                    <div className="form-group" key={index}>
+                                        <label>{item.fieldname}</label>
+                                        {error && <span style={{ color: 'red' }}>({error.errorMsg})</span>}
+                                        <input type="text"
+                                            name={item.fieldname.toLowerCase()}
+                                            className="form-control"
+                                            value={this.state[item.fieldname.toLowerCase()]}
+                                            onChange={this.onChange} />
+                                    </div>
+                                )
+                            })
                         }
                         <button className="btn btn-primary" onClick={this.onSubmit}> Place Order</button>
                     </div>

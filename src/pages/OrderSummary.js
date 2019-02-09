@@ -6,26 +6,36 @@ class OrderSummary extends Component {
 
     state = { orderData: null, products: [] }
 
-    componentDidUpdate(prevProps) {
-        let { match: { params: { orderId } }, history, user } = this.props;
-        if (user && !prevProps.user) {
-            utils.getOrderDetail(orderId)
-                .then(orderData => {
-                    if (orderData && orderData.userId === user.id) {
-                        var productParams = [];
-                        orderData.products.map(product => {
-                            productParams = [...productParams, { name: 'id', value: product.id }]
-                        });
-                        utils.fetchProducts(config.listingType.filterProductsListing, productParams)
-                            .then(products => {
-                                this.setState({ orderData, products });
-                            });
-                    }
-                    else {
-                        history.push('/notfound');
-                    }
-                })
+    componentDidMount() {
+        if (this.props.user) {
+            this.getOrderDetails();
         }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.user && !prevProps.user) {
+            this.getOrderDetails();
+        }
+    }
+
+    getOrderDetails = () => {
+        let { match: { params: { orderId } }, history, user } = this.props;
+        utils.getOrderDetail(orderId)
+            .then(orderData => {
+                if (orderData && orderData.userId === user.id) {
+                    var productParams = [];
+                    orderData.products.map(product => {
+                        productParams = [...productParams, { name: 'id', value: product.id }]
+                    });
+                    utils.fetchProducts(config.listingType.filterProductsListing, productParams)
+                        .then(products => {
+                            this.setState({ orderData, products });
+                        });
+                }
+                else {
+                    history.push('/notfound');
+                }
+            })
     }
 
     render() {
