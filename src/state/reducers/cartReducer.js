@@ -5,13 +5,16 @@ const INITIAL_STATE = {
 }
 
 export const cartReducer = (state = INITIAL_STATE, action) => {
+    var updatedCartItems = null;
     switch (action.type) {
         case ActionTypes.UPDATE_ITEMS:
-            var updatedCartItems = cartUtil.updateCartItems(state.cartItems, action.payload.product);
+            updatedCartItems = cartUtil.updateCartItems(state.cartItems, action.payload.product);
             return { ...state, cartItems: [...updatedCartItems] };
         case ActionTypes.REMOVE_FROM_CART:
-            var updatedCartItems = cartUtil.removeItemFromCart(state.cartItems, action.payload.productId);
+            updatedCartItems = cartUtil.removeItemFromCart(state.cartItems, action.payload.productId);
             return { ...state, cartItems: [...updatedCartItems] };
+        case ActionTypes.CHECKOUT:
+            return { ...state, cartItems: [] };
         default:
             return state;
     }

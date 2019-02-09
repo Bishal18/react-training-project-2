@@ -25,9 +25,9 @@ class ShippingForm extends React.Component {
             var products = [];
             var amountPaid = 0;
             cartItems.map((product) => {
-                var item = { id: product.id, qty: product.qty };
+                var item = { id: parseInt(product.id), qty: product.qty };
                 products = [...products, item];
-                amountPaid += (product.qty * product.price);
+                return amountPaid += product.totalPrice;
             });
             var dataSent = { userId, userDetails, products, amountPaid };
             this.props.placeOrder(dataSent, history);
@@ -52,7 +52,6 @@ class ShippingForm extends React.Component {
             errorMsgs = [...errorMsgs, { name: 'pincode', errorMsg: "Invalid Pincode!" }];
         }
         if (errorMsgs.length > 0) {
-            console.log(errorMsgs);
             this.setState({ errorMsgs });
             return false;
         }
