@@ -57,7 +57,7 @@ class App extends Component {
                             <Route path="/cart"
                                 component={cart} />
 
-                            <Route path="/orders/:orderId/confirmation"
+                            <AuthRoute path="/orders/:orderId/confirmation"
                                 exact
                                 component={OrderSummary} />
 

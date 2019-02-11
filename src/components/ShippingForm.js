@@ -92,15 +92,14 @@ class ShippingForm extends React.Component {
 }
 
 
-ShippingForm.PropTypes ={
-    name: PropTypes.sring,
+ShippingForm.propTypes ={
+    name: PropTypes.string,
     address: PropTypes.string,
     city: PropTypes.string,
     state: PropTypes.string,
     errorMsgs: PropTypes.array,
     userId: PropTypes.number,
-    cartItems: PropTypes.object
-
+    cartItems: PropTypes.array
 }
 
 export default withRouter(ShippingForm);

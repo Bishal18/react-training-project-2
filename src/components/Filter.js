@@ -56,7 +56,7 @@ class Filter extends Component {
     }
 }
 
-Filter.PropTypes ={
+Filter.propTypes ={
         filterCategory: PropTypes.string,
         searchQuery: PropTypes.string
 }

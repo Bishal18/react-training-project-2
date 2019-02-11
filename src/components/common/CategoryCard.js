@@ -26,7 +26,7 @@ class CategoryCard extends Component {
     }
 }
 
-CategoryCard.PropTypes = {
+CategoryCard.propTypes = {
     cardDetail : PropTypes.exact({
         id: PropTypes.number,
         name: PropTypes.string,

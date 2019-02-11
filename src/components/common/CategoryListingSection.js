@@ -32,7 +32,7 @@ class CategoryListingSection extends Component {
     }
 }
 
-CategoryListingSection.PropTypes = {
+CategoryListingSection.propTypes = {
     categoryList : PropTypes.array
 }
 

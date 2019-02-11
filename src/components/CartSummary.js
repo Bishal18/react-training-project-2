@@ -59,7 +59,7 @@ const cartSummary = (props) => {
     )
 }
 
-cartSummary.PropTypes ={
+cartSummary.propTypes ={
     totalQty: PropTypes.number,
     totalPrice: PropTypes.number,
         

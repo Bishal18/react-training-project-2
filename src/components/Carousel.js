@@ -25,13 +25,14 @@ class Carousel extends PureComponent {
     }
 }
 
-Carousel.PropTypes ={
+Carousel.propTypes ={
     settings : PropTypes.exact({
         dots: PropTypes.bool,
         infinite: PropTypes.bool,
         speed: PropTypes.number,
         slidesToShow: PropTypes.number,
-        slidesToScroll: PropTypes.number
+        slidesToScroll: PropTypes.number,
+        autoplay: PropTypes.bool
       }),
 }
 

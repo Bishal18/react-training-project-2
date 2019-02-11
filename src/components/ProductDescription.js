@@ -49,7 +49,7 @@ class ProductDescription extends Component {
                                 </div>
                                 <div className="col-md-4 offset-md-1">
                                     <h3>Add To Cart</h3>
-                                    <AddToCart product={detail} />
+                                    <AddToCart product={{ id: detail.id, name: detail.name, price: detail.price, qty: 0, totalPrice: detail.price }} />
                                 </div>
                             </div>
                             <br />
