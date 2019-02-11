@@ -39,9 +39,10 @@ export const checkout = () => ({
 })
 
 export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
-    utils.fetchProducts(type, filterParams)
+    return utils.fetchProducts(type, filterParams)
         .then(response => {
             dispatch(getProducts(response));
+            return response;
         })
 }
 
