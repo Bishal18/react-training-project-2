@@ -1,6 +1,7 @@
 import React from 'react';
 import AddToCart from '../containers/AddToCart';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const cartSummary = (props) => {
     var totalQty = 0;
@@ -56,6 +57,12 @@ const cartSummary = (props) => {
 
         </div>
     )
+}
+
+cartSummary.PropTypes ={
+    totalQty: PropTypes.number,
+    totalPrice: PropTypes.number,
+        
 }
 
 export default withRouter(cartSummary);

@@ -3,6 +3,7 @@ import StarRatings from 'react-star-ratings';
 import config from '../../configs/config';
 import AddToCart from '../../containers/AddToCart';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class ProductCard extends Component {
 
@@ -48,6 +49,16 @@ class ProductCard extends Component {
             </div>
         );
     }
+}
+
+ProductCard.PropTypes ={
+    cardDetail : PropTypes.exact({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        imageUrl: PropTypes.string,
+        shortDescription: PropTypes.string,
+        ratings: PropTypes.number
+      }),
 }
 
 export default withRouter(ProductCard);

@@ -1,6 +1,7 @@
 import React from 'react';
 import config from '../configs/config';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class ShippingForm extends React.Component {
 
@@ -91,5 +92,16 @@ class ShippingForm extends React.Component {
     }
 }
 
+
+ShippingForm.PropTypes ={
+    name: PropTypes.sring,
+    address: PropTypes.string,
+    city: PropTypes.string,
+    state: PropTypes.string,
+    errorMsgs: PropTypes.array,
+    userId: PropTypes.number,
+    cartItems: PropTypes.object
+
+}
 
 export default withRouter(ShippingForm);

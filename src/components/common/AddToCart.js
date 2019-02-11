@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AddToCart extends Component {
     render() {
@@ -36,4 +37,14 @@ class AddToCart extends Component {
     }
 }
 
+AddToCart.PropTypes = {
+    cartItems : PropTypes.object,
+    product : PropTypes.exact({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        price: PropTypes.number
+      }),
+}
+
 export default AddToCart;
+

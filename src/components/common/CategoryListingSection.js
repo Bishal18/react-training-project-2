@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CategoryCard from './CategoryCard';
 import * as utility from '../../utilities/api';
-
+import PropTypes from 'prop-types';
 
 class CategoryListingSection extends Component {
     state = { categoryList: [] }
@@ -30,6 +30,10 @@ class CategoryListingSection extends Component {
             </div>
         );
     }
+}
+
+CategoryListingSection.PropTypes = {
+    categoryList : PropTypes.array
 }
 
 export default CategoryListingSection;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class CategoryCard extends Component {
 
@@ -23,6 +24,14 @@ class CategoryCard extends Component {
             </div>
         );
     }
+}
+
+CategoryCard.PropTypes = {
+    cardDetail : PropTypes.exact({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        imageUrl: PropTypes.string
+      }),
 }
 
 export default withRouter(CategoryCard);
