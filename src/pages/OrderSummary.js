@@ -25,7 +25,7 @@ class OrderSummary extends Component {
                 if (orderData && orderData.userId === user.id) {
                     var productParams = [];
                     orderData.products.map(product => {
-                        productParams = [...productParams, { name: 'id', value: product.id }]
+                        return productParams = [...productParams, { name: 'id', value: product.id }]
                     });
                     utils.fetchProducts(config.listingType.filterProductsListing, productParams)
                         .then(products => {

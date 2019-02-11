@@ -1,7 +1,5 @@
 import * as ActionTypes from './action-types';
-import axios from 'axios';
 import * as utils from '../utilities/api';
-import config from '../configs/config';
 
 export const getProducts = (products) => ({
     type: ActionTypes.PRODUCTS,
@@ -36,6 +34,10 @@ export const validateToken = () => ({
     type: ActionTypes.VALIDATE_TOKEN
 })
 
+export const checkout = () => ({
+    type: ActionTypes.CHECKOUT
+})
+
 export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
     utils.fetchProducts(type, filterParams)
         .then(response => {
@@ -60,6 +62,7 @@ export const placeOrder = (data, history) => (dispatch, getState) => {
     utils.placeOrder(data)
         .then(response => {
             if (response.status === 201) {
+                dispatch(checkout());
                 history.push(`/orders/${response.data.id}/confirmation`);
             }
         })

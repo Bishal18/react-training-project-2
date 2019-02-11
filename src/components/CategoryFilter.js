@@ -27,7 +27,6 @@ class CategoryFilter extends Component {
 
     render() {
         let { categoryList, selectedCategory } = this.state;
-        console.log(categoryList, selectedCategory);
         return (
             <div>
                 {

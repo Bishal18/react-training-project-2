@@ -20,11 +20,6 @@ import AuthRoute from './containers/AuthRoute';
 import OrderSummary from './containers/OrderSummary';
 
 class App extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="container">
