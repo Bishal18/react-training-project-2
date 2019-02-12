@@ -1,5 +1,7 @@
-import { listingReducer } from "./listingReducer";
-import * as actions from "../actions";
+//Rathan
+
+import { listingReducer } from "../state/reducers/listingReducer";
+import * as actions from "../state/actions";
 
 describe("listing Reducer test suite", () => {
 

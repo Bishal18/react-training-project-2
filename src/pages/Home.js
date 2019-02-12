@@ -1,3 +1,5 @@
+//Manoj, Shubham, Ankit, Rathan
+
 import React from 'react';
 import Carousel from '../components/Carousel';
 import config from '../configs/config';
@@ -20,6 +22,7 @@ const Home = () => {
             </Carousel>
             <br />
             <hr />
+            <h2>Top Selling Products</h2>
             <ProductSection type={config.listingType.topProductsListing} />
         </div>
 

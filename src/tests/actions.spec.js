@@ -1,5 +1,7 @@
-import * as actions from "./actions";
-import * as ActionTypes from './action-types';
+//Shubham
+
+import * as actions from "../state/actions";
+import * as ActionTypes from '../state/action-types';
 import axios from 'axios';
 var mockResult = {};
 

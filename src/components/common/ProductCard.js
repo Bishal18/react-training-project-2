@@ -1,3 +1,5 @@
+//Ankit, Shubham
+
 import React, { Component } from 'react';
 import StarRatings from 'react-star-ratings';
 import config from '../../configs/config';

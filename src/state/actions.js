@@ -1,6 +1,8 @@
 import * as ActionTypes from './action-types';
 import * as utils from '../utilities/api';
 
+//---------------------------------------------------------------------------------------
+//Shubham - Start
 export const getProducts = (products) => ({
     type: ActionTypes.PRODUCTS,
     payload: { products }
@@ -15,12 +17,21 @@ export const removeFromCart = (productId) => ({
     type: ActionTypes.REMOVE_FROM_CART,
     payload: { productId }
 })
+//Shubham - End
 
-export const buyNow = (product) => ({
-    type: ActionTypes.BUY_NOW,
-    payload: { product }
-})
+//---------------------------------------------------------------------------------------
+//Ankit - Start
+export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
+    return utils.fetchProducts(type, filterParams)
+        .then(response => {
+            dispatch(getProducts(response));
+            return response;
+        })
+}
+//Ankit - End
+//---------------------------------------------------------------------------------------
 
+//Manoj - Start
 export const login = (user) => ({
     type: ActionTypes.LOGIN,
     payload: { user }
@@ -34,23 +45,12 @@ export const validateToken = () => ({
     type: ActionTypes.VALIDATE_TOKEN
 })
 
-export const checkout = () => ({
-    type: ActionTypes.CHECKOUT
-})
-
 export const register = (user, history) => (dispatch, getState) => {
     utils.register(user)
     .then(response => {
         dispatch(login(response));
         history.push('/')
     });
-}
-export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
-    return utils.fetchProducts(type, filterParams)
-        .then(response => {
-            dispatch(getProducts(response));
-            return response;
-        })
 }
 
 export const autheticateUser = (username, password, callback) => (dispatch, getState) => {
@@ -65,6 +65,13 @@ export const autheticateUser = (username, password, callback) => (dispatch, getS
             }
         })
 }
+//Manoj - End
+
+//---------------------------------------------------------------------------------------
+//Rathan - Start
+export const checkout = () => ({
+    type: ActionTypes.CHECKOUT
+})
 
 export const placeOrder = (data, history) => (dispatch, getState) => {
     utils.placeOrder(data)
@@ -75,3 +82,10 @@ export const placeOrder = (data, history) => (dispatch, getState) => {
             }
         })
 }
+//Rathan - End
+
+
+
+
+
+

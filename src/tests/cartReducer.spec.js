@@ -1,8 +1,11 @@
-import { cartReducer } from "./cartReducer";
-import * as actions from "../actions";
+//Shubham, Manoj
+
+import { cartReducer } from "../state/reducers/cartReducer";
+import * as actions from "../state/actions";
 
 describe("cart Reducer test suite", () => {
 
+    //Shubham - Start
     it("should add item to end of the array", () => {
 
         let prevState = { cartItems: [{ id: 1, name: 'dummy1', price: 1000, qty: 1, totalPrice: 1000 }] };
@@ -27,7 +30,10 @@ describe("cart Reducer test suite", () => {
                 cartItems: []
             });
     })
+    //Shubham - End
 
+    //--------------------------------------------------------------------------------------------
+    //Manoj - Start
     it("should increase item qty in array", () => {
 
         let prevState = { cartItems: [{ id: 1, name: 'dummy1', price: 1000, qty: 1, totalPrice: 1000 }] };
@@ -49,5 +55,6 @@ describe("cart Reducer test suite", () => {
                 cartItems: [{ id: 1, name: 'dummy1', price: 1000, qty: 1, totalPrice: 1000 }]
             });
     })
+    //Manoj - End
 
 })
