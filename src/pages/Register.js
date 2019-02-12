@@ -41,6 +41,7 @@ class Register extends Component {
             this.props.register(user, this.props.history);
         }
         else{
+            console.log("register fail");
             this.setState({
                 errMsg: "All the fields are mandatory"
             });
@@ -95,7 +96,7 @@ class Register extends Component {
                             {
                                 this.state.errMsg ? (
                                     <div className="alert alert-danger">
-                                        {this.state.errorMsg}</div>
+                                        {this.state.errMsg}</div>
                                 ) : ''
                             }
                         </div>
