@@ -2,8 +2,9 @@ import { connect } from 'react-redux';
 import * as actions from '../state/actions';
 import ProductListingSection from '../components/common/ProductListingSection';
 
-const mapStateToProps = ({ listing: { products } }) => ({
-    products
+const mapStateToProps = ({ listing: { products }, cart: { cartItems } }) => ({
+    products,
+    cartItems
 });
 
 const mapDispatchToProps = (dispatch, getState) => {

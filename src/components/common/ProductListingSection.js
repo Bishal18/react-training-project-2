@@ -17,7 +17,7 @@ class ProductListingSection extends Component {
     }
 
     render() {
-        let { products, updateCart } = this.props;
+        let { products, updateCart, cartItems } = this.props;
         return (
             <div className="row">
                 {
@@ -25,7 +25,8 @@ class ProductListingSection extends Component {
                         ? products.map((product, index) => (
                             <ProductCard key={index}
                                 cardDetail={product}
-                                buyNow={updateCart} />
+                                buyNow={updateCart}
+                                cartItems={cartItems} />
                         ))
                         : <h3>Products Not Found!</h3>
                 }

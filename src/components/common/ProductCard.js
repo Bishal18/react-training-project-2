@@ -12,8 +12,14 @@ class ProductCard extends Component {
     }
 
     callBuyNow = () => {
-        let { cardDetail } = this.props;
-        this.props.buyNow({ ...cardDetail, qty: 1, totalPrice: cardDetail.price });
+        let { cardDetail, cartItems } = this.props;
+        var cartItem = cartItems.find(item => item.id === cardDetail.id);
+        if (cartItem) {
+            this.props.buyNow({ ...cartItem, qty: cartItem.qty + 1, totalPrice: (cartItem.qty + 1) * cardDetail.price });
+        }
+        else {
+            this.props.buyNow({ ...cardDetail, qty: 1, totalPrice: cardDetail.price });
+        }
         this.props.history.push('/checkout');
     }
 
