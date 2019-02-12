@@ -41,7 +41,6 @@ class Register extends Component {
             this.props.register(user, this.props.history);
         }
         else{
-            console.log("register fail");
             this.setState({
                 errMsg: "All the fields are mandatory"
             });

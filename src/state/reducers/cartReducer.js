@@ -8,7 +8,6 @@ const INITIAL_STATE = {
 
 export const cartReducer = (state = INITIAL_STATE, action) => {
     var updatedCartItems = null;
-     console.log("cart Reducer", state)
     switch (action.type) {
         case ActionTypes.UPDATE_ITEMS:
             updatedCartItems = cartUtil.updateCartItems(state.cartItems, action.payload.product);
@@ -17,6 +16,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
             updatedCartItems = cartUtil.removeItemFromCart(state.cartItems, action.payload.productId);
             return { ...state, cartItems: [...updatedCartItems] };
         case ActionTypes.CHECKOUT:
+            window.sessionStorage.clear();
             return { ...state, cartItems: [] };
         default:
             return state;

@@ -1,62 +1,59 @@
 //Ankit, Shubham
 
-import React, { Component } from 'react';
+import React from 'react';
 import StarRatings from 'react-star-ratings';
 import config from '../../configs/config';
 import AddToCart from '../../containers/AddToCart';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-class ProductCard extends Component {
+const onClickMore = (history, productId) => {
+    history.push(`/products/${productId}`);
+}
 
-    onClickMore = (productId) => {
-        this.props.history.push(`/products/${productId}`);
+const callBuyNow = (props) => {
+    let { cardDetail, cartItems } = props;
+    var cartItem = cartItems.find(item => item.id === cardDetail.id);
+    if (cartItem) {
+        props.buyNow({ ...cartItem, qty: cartItem.qty + 1, totalPrice: (cartItem.qty + 1) * cardDetail.price });
     }
-
-    callBuyNow = () => {
-        let { cardDetail, cartItems } = this.props;
-        var cartItem = cartItems.find(item => item.id === cardDetail.id);
-        if (cartItem) {
-            this.props.buyNow({ ...cartItem, qty: cartItem.qty + 1, totalPrice: (cartItem.qty + 1) * cardDetail.price });
-        }
-        else {
-            this.props.buyNow({ ...cardDetail, qty: 1, totalPrice: cardDetail.price });
-        }
-        this.props.history.push('/checkout');
+    else {
+        props.buyNow({ ...cardDetail, qty: 1, totalPrice: cardDetail.price });
     }
+    props.history.push('/checkout');
+}
 
-    render() {
-        let { cardDetail: { id, name, price, shortDescription, imageUrl, ratings } } = this.props;
-        return (
-            <div className="col-md-3">
-                <div className="card">
-                    <img onClick={() => this.onClickMore(id)} style={{ cursor: 'pointer' }} src={imageUrl} className="card-img-top" alt={name} />
-                    <div className="card-body">
-                        <h5 className="card-title">{name}</h5>
-                        <div className="cardDetails">
-                            <StarRatings rating={ratings.avgRating}
-                                starRatedColor="yellow"
-                                numberOfStars={config.totalStars}
-                                name='rating'
-                                starDimension="20px"
-                                starSpacing="3px" />
-                            <p>({ratings.totalReviews} rated)</p>
-                            <p className="card-text">{shortDescription}</p>
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <button className="btn btn-primary" onClick={this.callBuyNow}>Buy Now</button>
-                                </div>
-                                <div className="col-md-6">
-                                    <AddToCart product={{ id, name, price, qty: 0, totalPrice: price }} />
-                                </div>
+const ProductCard = (props) => {
+    let { cardDetail: { id, name, price, shortDescription, imageUrl, ratings } } = props;
+    return (
+        <div className="col-md-3">
+            <div className="card">
+                <img onClick={() => onClickMore(props.history, id)} style={{ cursor: 'pointer' }} src={imageUrl} className="card-img-top" alt={name} />
+                <div className="card-body">
+                    <h5 className="card-title">{name}</h5>
+                    <div className="cardDetails">
+                        <StarRatings rating={ratings.avgRating}
+                            starRatedColor="yellow"
+                            numberOfStars={config.totalStars}
+                            name='rating'
+                            starDimension="20px"
+                            starSpacing="3px" />
+                        <p>({ratings.totalReviews} rated)</p>
+                        <p className="card-text">{shortDescription}</p>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <button className="btn btn-primary" onClick={() => callBuyNow(props)}>Buy Now</button>
+                            </div>
+                            <div className="col-md-6">
+                                <AddToCart product={{ id, name, price, qty: 0, totalPrice: price }} />
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 ProductCard.propTypes = {

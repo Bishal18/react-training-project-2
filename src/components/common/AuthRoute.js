@@ -31,7 +31,7 @@ const AuthRoute = (props) => {
 
 AuthRoute.propTypes = {
     authenticated: PropTypes.bool.isRequired,
-    exact: PropTypes.string,
+    exact: PropTypes.bool,
     path: PropTypes.string.isRequired,
     component: PropTypes.func,
     location: PropTypes.object

@@ -1,34 +1,32 @@
 //Shubham
 
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class AddToCart extends Component {
-    render() {
-        let { product, cartItems } = this.props;
-        let cartItem = cartItems.find(item => item.id === product.id);
+const AddToCart = (props) => {
+    let { product, cartItems } = props;
+    let cartItem = cartItems.find(item => item.id === product.id);
 
-        return (
-            <span>
-                {
-                    cartItem && cartItem.qty > 0
-                        ? <span>
-                            <span className="btn btn-primary" onClick={(e) => this.props.updateCart({
-                                ...cartItem, qty: cartItem.qty - 1, totalPrice: (cartItem.qty - 1) * cartItem.price
-                            })} >-</span>
-                            <span style={{margin: "0px 2px 0px 2px"}}>{cartItem.qty}</span>
-                            <span className="btn btn-primary" onClick={(e) => this.props.updateCart({
-                                ...cartItem, qty: cartItem.qty + 1, totalPrice: (cartItem.qty + 1) * cartItem.price
-                            })} >+</span>
-                        </span>
-                        : <button className="btn btn-primary" onClick={(e) => this.props.updateCart({
-                            ...product, qty: product.qty + 1, totalPrice: (product.qty + 1) * product.price
-                        })} >+Cart</button>
-                }
-            </span>
-        );
-    }
+    return (
+        <span>
+            {
+                cartItem && cartItem.qty > 0
+                    ? <span>
+                        <span className="btn btn-primary" onClick={(e) => props.updateCart({
+                            ...cartItem, qty: cartItem.qty - 1, totalPrice: (cartItem.qty - 1) * cartItem.price
+                        })} >-</span>
+                        <span style={{ margin: "0px 2px 0px 2px" }}>{cartItem.qty}</span>
+                        <span className="btn btn-primary" onClick={(e) => props.updateCart({
+                            ...cartItem, qty: cartItem.qty + 1, totalPrice: (cartItem.qty + 1) * cartItem.price
+                        })} >+</span>
+                    </span>
+                    : <button className="btn btn-primary" onClick={(e) => props.updateCart({
+                        ...product, qty: product.qty + 1, totalPrice: (product.qty + 1) * product.price
+                    })} >+Cart</button>
+            }
+        </span>
+    );
 }
 
 AddToCart.propTypes = {

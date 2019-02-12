@@ -100,7 +100,7 @@ ShippingForm.propTypes ={
     city: PropTypes.string,
     state: PropTypes.string,
     errorMsgs: PropTypes.array,
-    userId: PropTypes.number,
+    userId: PropTypes.any,
     cartItems: PropTypes.array
 }
 
