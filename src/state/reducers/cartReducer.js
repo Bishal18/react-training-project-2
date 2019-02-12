@@ -6,6 +6,7 @@ const INITIAL_STATE = {
 
 export const cartReducer = (state = INITIAL_STATE, action) => {
     var updatedCartItems = null;
+     console.log("cart Reducer", state)
     switch (action.type) {
         case ActionTypes.UPDATE_ITEMS:
             updatedCartItems = cartUtil.updateCartItems(state.cartItems, action.payload.product);

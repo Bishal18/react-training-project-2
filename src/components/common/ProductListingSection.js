@@ -18,6 +18,7 @@ class ProductListingSection extends Component {
 
     render() {
         let { products, updateCart, cartItems } = this.props;
+        console.log("ProductList", this.props)
         return (
             <div className="row">
                 {

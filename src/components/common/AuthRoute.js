@@ -33,6 +33,6 @@ AuthRoute.propTypes = {
     exact: PropTypes.string,
     path: PropTypes.string.isRequired,
     component: PropTypes.isRequired,
-    location: PropTypes.string
+    location: PropTypes.object
 }
 export default AuthRoute;
