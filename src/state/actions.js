@@ -38,6 +38,13 @@ export const checkout = () => ({
     type: ActionTypes.CHECKOUT
 })
 
+export const register = (user, history) => (dispatch, getState) => {
+    utils.register(user)
+    .then(response => {
+        dispatch(login(response));
+        history.push('/')
+    });
+}
 export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
     return utils.fetchProducts(type, filterParams)
         .then(response => {

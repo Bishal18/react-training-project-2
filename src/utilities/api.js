@@ -1,5 +1,7 @@
 import config from '../configs/config';
+import graphqlClient from './graphql';
 import axios from 'axios';
+import gql from "graphql-tag";
 
 export const getProductApiUrl = (type, filterParams = []) => {
     var apiUrl = `${config.baseApiUrl}${config.apiRoutes.productRoute}`;
@@ -23,14 +25,19 @@ export const getProductApiUrl = (type, filterParams = []) => {
 }
 
 export const fetchCategories = async () => {
-    let apiUrl = `${config.baseApiUrl}${config.apiRoutes.categoryRoute}`;
-    return axios.get(apiUrl)
-        .then(response => {
-            return response.data;
-        })
-        .catch(function (error) {
-            console.log("Error in fetchCategories api: " + error);
-        });
+    if (config.useGraphqlServer) {
+        return getCategoriesGraphql();
+    }
+    else {
+        let apiUrl = `${config.baseApiUrl}${config.apiRoutes.categoryRoute}`;
+        return axios.get(apiUrl)
+            .then(response => {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log("Error in fetchCategories api: " + error);
+            });
+    }
 }
 
 export const fetchProducts = async (type, filterParams) => {
@@ -45,14 +52,52 @@ export const fetchProducts = async (type, filterParams) => {
 }
 
 export const authenticateUser = async (username, password) => {
-    var apiUrl = `${config.baseApiUrl}${config.apiRoutes.usersRoute}?username=${username}&password=${password}`
-    return axios.get(apiUrl)
-        .then(response => {
-            return response.data;
-        })
-        .catch(function (error) {
+    if (config.useGraphqlServer) {
+        return graphqlClient.query({
+            query: gql`
+                        query GetUser($username: String!, $password: String!){
+                            allUsers(filter: {username: $username, password: $password})
+                            {
+                                id,
+                                username,
+                                password
+                            }
+                        }
+                        `,
+            variables: {
+                username: username,
+                password: password
+            }
+        }).then(result => {
+            const {
+                data
+            } = result;
+            return data.allUsers;
+        }).catch(function (error) {
             console.log("Error in authenticateUser api: " + error);
         });
+    }
+    else {
+        var apiUrl = `${config.baseApiUrl}${config.apiRoutes.usersRoute}?username=${username}&password=${password}`
+        return axios.get(apiUrl)
+            .then(response => {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log("Error in authenticateUser api: " + error);
+            });
+    }
+}
+
+export const register = async (user) => {
+    var apiUrl = `${config.baseApiUrl}${config.apiRoutes.usersRoute}`
+    return axios.post(apiUrl, user)
+    .then(response => {
+        return response.data;
+    })
+    .catch(function (error) {
+        console.log("Error in register api: " + error);
+    });
 }
 
 export const placeOrder = async (data) => {
@@ -75,4 +120,28 @@ export const getOrderDetail = async (orderId) => {
         .catch(function (error) {
             console.log("Error in getOrderDetail api: " + error);
         });
+}
+
+//--------------------------------------------------------------------------------------------------
+//GraphQl API's
+
+const getCategoriesGraphql = async () => {
+    return graphqlClient.query({
+        query: gql`
+                    query{
+                        allCategories{
+                            id,
+                            name,
+                            imageUrl
+                        }
+                    }
+                    `
+    }).then(result => {
+        const {
+            data
+        } = result;
+        return data.allCategories;
+    }).catch(function (error) {
+        console.log("Error in fetchCategories api: " + error);
+    });
 }

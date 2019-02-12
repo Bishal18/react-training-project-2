@@ -11,7 +11,6 @@ const AuthRoute = (props) => {
         component,
         location
     } = props;
-
     return (
             <React.Fragment>
                 <Route path={path}
@@ -32,7 +31,7 @@ AuthRoute.propTypes = {
     authenticated: PropTypes.bool.isRequired,
     exact: PropTypes.string,
     path: PropTypes.string.isRequired,
-    component: PropTypes.isRequired,
+    component: PropTypes.func,
     location: PropTypes.object
 }
 export default AuthRoute;

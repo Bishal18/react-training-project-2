@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-cache-inmemory": "^1.4.2",
+    "apollo-client": "^2.4.12",
+    "apollo-link-http": "^1.5.11",
     "axios": "^0.18.0",
     "base-64": "^0.1.0",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
     "prop-types": "^15.6.2",
     "react": "^16.8.0",
     "react-debounce-input": "^3.2.0",
