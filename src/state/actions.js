@@ -1,14 +1,12 @@
 import * as ActionTypes from './action-types';
-import axios from 'axios';
 import * as utils from '../utilities/api';
-import config from '../configs/config';
 
 export const getProducts = (products) => ({
     type: ActionTypes.PRODUCTS,
     payload: { products }
 })
 
-export const updateCart = (product) => (console.log('update', product), {
+export const updateCart = (product) => ({
     type: ActionTypes.UPDATE_ITEMS,
     payload: { product }
 })
@@ -23,17 +21,6 @@ export const buyNow = (product) => ({
     payload: { product }
 })
 
-export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
-    var apiUrl = utils.getProductApiUrl(type, filterParams);
-    axios.get(apiUrl)
-        .then(response => {
-            dispatch(getProducts(response.data));
-        })
-        .catch(function (error) {
-            console.log("Error in fetchProducts action: " + error);
-        });
-}
-
 export const login = (user) => ({
     type: ActionTypes.LOGIN,
     payload: { user }
@@ -47,10 +34,20 @@ export const validateToken = () => ({
     type: ActionTypes.VALIDATE_TOKEN
 })
 
+export const checkout = () => ({
+    type: ActionTypes.CHECKOUT
+})
+
+export const fetchProducts = (type, filterParams) => (dispatch, getState) => {
+    return utils.fetchProducts(type, filterParams)
+        .then(response => {
+            dispatch(getProducts(response));
+            return response;
+        })
+}
+
 export const autheticateUser = (username, password, callback) => (dispatch, getState) => {
-    const api = `${config.baseApiUrl}${config.apiRoutes.usersRoute}?username=${username}&password=${password}`
-    fetch(api)
-        .then(response => response.json())
+    utils.authenticateUser(username, password)
         .then(users => {
             if (users && users.length > 0) {
                 dispatch(login(users[0]));
@@ -59,7 +56,15 @@ export const autheticateUser = (username, password, callback) => (dispatch, getS
             else {
                 callback(false);
             }
-        });
+        })
 }
 
-
+export const placeOrder = (data, history) => (dispatch, getState) => {
+    utils.placeOrder(data)
+        .then(response => {
+            if (response.status === 201) {
+                dispatch(checkout());
+                history.push(`/orders/${response.data.id}/confirmation`);
+            }
+        })
+}

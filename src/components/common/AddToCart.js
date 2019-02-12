@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AddToCart extends Component {
     render() {
-        let { product: { id, name, price }, cartItems } = this.props;
-        this.product = { id, name, price, qty: 0 };
-        this.product.totalPrice = this.product.qty * this.product.price;
-        let cartItem = cartItems.find(item => item.id === this.product.id);
+        let { product, cartItems } = this.props;
+        let cartItem = cartItems.find(item => item.id === product.id);
 
         return (
             <div>
@@ -27,7 +26,7 @@ class AddToCart extends Component {
                             </div>
                         </div>
                         : <button className="btn btn-primary" onClick={(e) => this.props.updateCart({
-                            ...this.product, qty: this.product.qty + 1, totalPrice: (this.product.qty + 1) * this.product.price
+                            ...product, qty: product.qty + 1, totalPrice: (product.qty + 1) * product.price
                         })} >+Cart</button>
                 }
 
@@ -36,4 +35,16 @@ class AddToCart extends Component {
     }
 }
 
+AddToCart.propTypes = {
+    cartItems: PropTypes.array,
+    product: PropTypes.exact({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        price: PropTypes.number,
+        qty: PropTypes.number,
+        totalPrice: PropTypes.number
+    }),
+}
+
 export default AddToCart;
+

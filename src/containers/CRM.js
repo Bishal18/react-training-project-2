@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import CRM from '../components/CRM';
 
 const mapStateToProps = (state) => {
-    console.log('mapStateToProps header', state);
     return {
         user: state.auth.user
     }

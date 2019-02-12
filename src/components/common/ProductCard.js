@@ -3,6 +3,7 @@ import StarRatings from 'react-star-ratings';
 import config from '../../configs/config';
 import AddToCart from '../../containers/AddToCart';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class ProductCard extends Component {
 
@@ -17,7 +18,7 @@ class ProductCard extends Component {
     }
 
     render() {
-        let { cardDetail, cardDetail: { id, name, shortDescription, imageUrl, ratings } } = this.props;
+        let { cardDetail: { id, name, price, shortDescription, imageUrl, ratings } } = this.props;
         return (
             <div className="col-md-3">
                 <div className="card">
@@ -38,7 +39,7 @@ class ProductCard extends Component {
                                     <button className="btn btn-primary" onClick={this.callBuyNow}>Buy Now</button>
                                 </div>
                                 <div className="col-md-6">
-                                    <AddToCart product={cardDetail} />
+                                    <AddToCart product={{ id, name, price, qty: 0, totalPrice: price }} />
                                 </div>
                             </div>
                         </div>
@@ -48,6 +49,20 @@ class ProductCard extends Component {
             </div>
         );
     }
+}
+
+ProductCard.propTypes = {
+    cardDetail: PropTypes.exact({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        imageUrl: PropTypes.string,
+        shortDescription: PropTypes.string,
+        categoryId: PropTypes.number,
+        longDescription: PropTypes.string,
+        price: PropTypes.number,
+        ratings: PropTypes.object,
+        views: PropTypes.number
+    }),
 }
 
 export default withRouter(ProductCard);

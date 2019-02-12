@@ -37,6 +37,10 @@ const config = {
         { fieldname: "City" },
         { fieldname: "State" },
         { fieldname: "Pincode" }
-    ]
+    ],
+    localStorageKeys: {
+        authToken: 'authToken',
+        cartItems: 'cartItems'
+    }
 }
 export default config

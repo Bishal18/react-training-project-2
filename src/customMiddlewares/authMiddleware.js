@@ -2,14 +2,13 @@ import base64 from 'base-64'
 import * as ActionTypes from '../state/action-types';
 import config from '../configs/config'
 import * as actions from '../state/actions'
+import * as utils from '../utilities/api';
 
 function authenticateUser(store) {
-    const authToken = window.localStorage.getItem('authToken');
+    const authToken = window.localStorage.getItem(config.localStorageKeys.authToken);
     if (authToken) {
         const data = base64.decode(authToken).split(':');
-        const api = `${config.baseApiUrl}${config.apiRoutes.usersRoute}?username=${data[0]}&password=${data[1]}`
-        fetch(api)
-            .then(response => response.json())
+        utils.authenticateUser(data[0], data[1])
             .then(users => {
                 if (users && users.length > 0) {
                     store.dispatch(actions.login(users[0]));
@@ -33,11 +32,12 @@ function authMiddleware(store) {
             if (action.type && action.type === ActionTypes.LOGIN) {
                 const user = action.payload.user;
                 const hash = base64.encode(`${user.username}:${user.password}`);
-                window.localStorage.setItem("authToken", hash);
+                window.localStorage.setItem(config.localStorageKeys.authToken, hash);
             }
 
             if (action.type && action.type === ActionTypes.LOGOUT) {
-                window.localStorage.removeItem("authToken");
+                window.localStorage.removeItem(config.localStorageKeys.authToken);
+                window.sessionStorage.removeItem(config.localStorageKeys.cartItems);
             }
 
             return result;

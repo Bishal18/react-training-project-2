@@ -9,8 +9,10 @@ class CategoryFilter extends Component {
     componentDidMount() {
         utility.fetchCategories()
             .then(res => {
-                var categoryList = res;
-                this.setState({ categoryList });
+                if (res) {
+                    var categoryList = [{ id: 0, name: 'All' }, ...res];
+                    this.setState({ categoryList });
+                }
             });
         let { selectedCategory } = this.props;
         if (selectedCategory) {
@@ -26,22 +28,27 @@ class CategoryFilter extends Component {
     render() {
         let { categoryList, selectedCategory } = this.state;
         return (
-            <div className="row">
-                <div className="col-md-4">
-                    <p>Category:</p>
-                </div>
-                <div className="col-md-7">
-                    <select value={selectedCategory} onChange={this.onCategoryChange}>
-                        <option value="0">All</option>
-                        {
-                            categoryList.map(category => {
-                                return (
-                                    <option key={category.id} value={category.id}>{category.name}</option>
-                                )
-                            })
-                        }
-                    </select>
-                </div>
+            <div>
+                {
+                    categoryList && categoryList.length > 0
+                    &&
+                    <div className="row">
+                        <div className="col-md-4">
+                            <p>Category:</p>
+                        </div>
+                        <div className="col-md-7">
+                            <select value={selectedCategory} onChange={this.onCategoryChange}>
+                                {
+                                    categoryList.map(category => {
+                                        return (
+                                            <option key={category.id} value={category.id}>{category.name}</option>
+                                        )
+                                    })
+                                }
+                            </select>
+                        </div>
+                    </div>
+                }
             </div>
         );
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchProduct from '../components/SearchProduct';
 import CategoryFilter from '../components/CategoryFilter';
 import config from '../configs/config';
+import PropTypes from 'prop-types';
 
 class Filter extends Component {
 
@@ -53,6 +54,11 @@ class Filter extends Component {
             </div>
         );
     }
+}
+
+Filter.propTypes ={
+        filterCategory: PropTypes.string,
+        searchQuery: PropTypes.string
 }
 
 export default Filter;

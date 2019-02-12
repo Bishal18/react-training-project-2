@@ -1,2 +1,0 @@
-#-------------------------------
-All customMiddlewares comes here.
