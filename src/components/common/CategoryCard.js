@@ -27,8 +27,8 @@ class CategoryCard extends Component {
 }
 
 CategoryCard.propTypes = {
-    cardDetail : PropTypes.exact({
-        id: PropTypes.number,
+    cardDetail : PropTypes.shape({
+        id: PropTypes.any,
         name: PropTypes.string,
         imageUrl: PropTypes.string
       }),
