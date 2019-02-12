@@ -1,5 +1,7 @@
 const config = {
     baseApiUrl: "https://reactprojectdbserver.azurewebsites.net",
+    baseGraphqlApiUrl: "https://reactprojectdbserver.azurewebsites.net/graphql",
+    useGraphqlServer: true,
     apiRoutes: {
         productRoute: "/products",
         categoryRoute: "/categories",

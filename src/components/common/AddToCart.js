@@ -7,30 +7,23 @@ class AddToCart extends Component {
         let cartItem = cartItems.find(item => item.id === product.id);
 
         return (
-            <div>
+            <span>
                 {
                     cartItem && cartItem.qty > 0
-                        ? <div className="row">
-                            <div className="col-md-3">
-                                <span className="btn btn-primary" onClick={(e) => this.props.updateCart({
-                                    ...cartItem, qty: cartItem.qty - 1, totalPrice: (cartItem.qty - 1) * cartItem.price
-                                })} >-</span>
-                            </div>
-                            <div className="col-md-2 offset-md-1">
-                                <p>{cartItem.qty}</p>
-                            </div>
-                            <div className="col-md-3">
-                                <span className="btn btn-primary" onClick={(e) => this.props.updateCart({
-                                    ...cartItem, qty: cartItem.qty + 1, totalPrice: (cartItem.qty + 1) * cartItem.price
-                                })} >+</span>
-                            </div>
-                        </div>
+                        ? <span>
+                            <span className="btn btn-primary" onClick={(e) => this.props.updateCart({
+                                ...cartItem, qty: cartItem.qty - 1, totalPrice: (cartItem.qty - 1) * cartItem.price
+                            })} >-</span>
+                            <span style={{margin: "0px 2px 0px 2px"}}>{cartItem.qty}</span>
+                            <span className="btn btn-primary" onClick={(e) => this.props.updateCart({
+                                ...cartItem, qty: cartItem.qty + 1, totalPrice: (cartItem.qty + 1) * cartItem.price
+                            })} >+</span>
+                        </span>
                         : <button className="btn btn-primary" onClick={(e) => this.props.updateCart({
                             ...product, qty: product.qty + 1, totalPrice: (product.qty + 1) * product.price
                         })} >+Cart</button>
                 }
-
-            </div>
+            </span>
         );
     }
 }
