@@ -55,6 +55,17 @@ export const authenticateUser = async (username, password) => {
         });
 }
 
+export const register = async (user) => {
+    var apiUrl = `${config.baseApiUrl}${config.apiRoutes.usersRoute}`
+    return axios.post(apiUrl, user)
+    .then(response => {
+        return response.data;
+    })
+    .catch(function (error) {
+        console.log("Error in register api: " + error);
+    });
+}
+
 export const placeOrder = async (data) => {
     var apiUrl = `${config.baseApiUrl}${config.apiRoutes.orderRoute}`
     return axios.post(apiUrl, data)

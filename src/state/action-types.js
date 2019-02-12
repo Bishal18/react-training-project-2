@@ -1,5 +1,6 @@
 
 export const LOGIN = "AUTH.LOGIN";
+export const REGISTER = "AUTH.REGISTER";
 export const LOGOUT = "AUTH.LOGOUT";
 export const VALIDATE_TOKEN = "VALIDATE_TOKEN";
 export const PRODUCTS = "PRODUCTS.GET_PRODUCTS";

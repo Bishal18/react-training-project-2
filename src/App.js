@@ -18,6 +18,7 @@ import checkout from './pages/Checkout';
 import notFound from './pages/NotFound';
 import AuthRoute from './containers/AuthRoute';
 import OrderSummary from './containers/OrderSummary';
+import Register from './containers/Register';
 
 class App extends Component {
     render() {
@@ -50,6 +51,9 @@ class App extends Component {
 
                             <Route path="/login"
                                 component={Login} />
+
+                            <Route path="/register"
+                                component={Register} />
 
                             <AuthRoute path='/checkout'
                                 component={checkout} />
