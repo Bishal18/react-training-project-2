@@ -12,13 +12,13 @@ const onClickMore = (history, productId) => {
 }
 
 const callBuyNow = (props) => {
-    let { cardDetail, cartItems } = props;
-    var cartItem = cartItems.find(item => item.id === cardDetail.id);
+    let { cardDetail: {id, name, price}, cartItems } = props;
+    var cartItem = cartItems.find(item => item.id === id);
     if (cartItem) {
-        props.buyNow({ ...cartItem, qty: cartItem.qty + 1, totalPrice: (cartItem.qty + 1) * cardDetail.price });
+        props.buyNow({ ...cartItem, qty: cartItem.qty + 1, totalPrice: (cartItem.qty + 1) * price });
     }
     else {
-        props.buyNow({ ...cardDetail, qty: 1, totalPrice: cardDetail.price });
+        props.buyNow({ id, name, price, qty: 1, totalPrice: price });
     }
     props.history.push('/checkout');
 }
