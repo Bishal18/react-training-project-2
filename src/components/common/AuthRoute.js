@@ -1,7 +1,8 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function AuthRoute(props) {
+const AuthRoute = (props) => {
     
     let {
         authenticated,
@@ -27,4 +28,11 @@ function AuthRoute(props) {
     )
 }
 
+AuthRoute.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+    exact: PropTypes.string,
+    path: PropTypes.string.isRequired,
+    component: PropTypes.isRequired,
+    location: PropTypes.string
+}
 export default AuthRoute;
