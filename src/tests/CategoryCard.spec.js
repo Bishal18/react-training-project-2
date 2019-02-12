@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {mount} from "enzyme";
-import CartegoryCard from './CategoryCard';
+import CartegoryCard from '../components/common/CategoryCard';
 import {BrowserRouter} from 'react-router-dom';
 
 describe('CartegoryCard Suite',() =>{
